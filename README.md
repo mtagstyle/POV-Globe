@@ -37,6 +37,18 @@ Examples:
 
 # Design Overview
 
+### The System
+
+Shown above is the block diagram showing all of the components involved in the system. The following are the responsibilities of each components.
+
+Component  | Responsibilities
+---------- | -------------
+Stationary PCB  | Content Cell
+Rotating PCB  | Content Cell
+Mechanical Fixture | 
+Firmware (Drivers) | 
+Firwmare (Applications/Middleware) | 
+
 # Implementation Overview
 
 ### Folder Structure
