@@ -47,7 +47,7 @@ Stationary Circuit  | This PCB is responsible for taking power from a wall-power
 Rotating Circuit  | This PCB has 2 main responsibilities: The first responsibility is to take power from the stationary PCB and convert it to what it needs. The second responsibility is to hostthe micro controller and sensors which are used to drive the LED strips at certain intervals of time.
 Mechanical Fixture | This component represents the fixture used to hold all of the circuit boards and the mechanics/interactions between the stationary and rotating component.
 Firmware (Drivers) | This component is the code that is used to address/drive the segment of LEDs as well as detecting at what time intervals to turn them on/off.
-Firwmare (Applications/Middleware) | This component represents the design of the operating environment that the host environment will run on, how the drivers will interact with the application program, as well as the design of the interfaces that will be exposed to the outside world.
+Firmware (Applications/Middleware) | This component represents the design of the operating environment that the host environment will run on, how the drivers will interact with the application program, as well as the design of the interfaces that will be exposed to the outside world.
 
 # Implementation Overview
 
