@@ -19,8 +19,21 @@ Examples:
 - Honing technical skills (PCB Design, Mechanical Design, System Design, Firmware Development, Power Electronics)
 
 # Goal(s)
-- Milestone 1: Barebones proof-of-concept
-- Milestone 2: Initial prototype
+* Milestone 1: Proof-of-concept prototype
+  * A base station that is able to rotate a rotating component
+  * A rotating component that can display a "hello world" type of example
+  
+* Milestone 2: Final Design
+  * Improve any limitations discovered in milestone 1
+  * Have an actual formalized design based offf of the prototype
+  * Add in any functionality that may be missing from milestone 1
+  
+* Milestone 3: Adding new features
+  * Improve any limitations discovered in milestone 2
+  * Brainstorm
+  * IoT integration: Support for Wifi, Bluetooth, ANT?
+  * Supply an API that may send image data to the POV display  
+  
 
 # Design Overview
 
