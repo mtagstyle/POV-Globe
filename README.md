@@ -18,12 +18,18 @@ Examples:
 - Beakerhead display
 - Honing technical skills (PCB Design, Mechanical Design, System Design, Firmware Development, Power Electronics)
 
+# Goal(s)
+- Milestone 1: Barebones proof-of-concept
+- Milestone 2: Initial prototype
+
 # Design Overview
 
 # Implementation Overview
+
 ### Folder Structure
 
-- src:       Contains all of the source code
-- hw:        Contains all of the hardware design
-- resources: A scratch folder containing resources 
-- design:   fadff
+- firmware: Contains all of the source code
+- hardware: Contains all of the hardware design
+- resource: A list of resources used for research 
+- documents: Contains all design documents
+- media: Contains journal entries and media
