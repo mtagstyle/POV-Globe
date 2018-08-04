@@ -51,9 +51,9 @@ Firmware (Applications/Middleware) | This component represents the design of the
 
 *** TBD^ Update ^ ** 
 Component 1 (System Design):
-- Requirements created for overall system
-- External Interfaces and Internal Interfaces (Logical Level)
-- System design documents created
+- Requirements created for overall system (1.5 Weeks)
+- System design documents created: Basic block diagram (2 weeks)
+- External Interfaces (0.5 weeks) (Logical Level)
 
 Component 2 (Prototype Power Delivery): 
 - Power Delivery Solution
