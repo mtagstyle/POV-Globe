@@ -1,0 +1,20 @@
+Functional:
+- System must use persistence of vision to display an image
+- System must be able to control where the position of the image is shown with respect to the viewer
+- System must be able to display colored images
+- System must retain 1 image in its own memory at any time and display it until a new image is sent to it
+- System must physically support itself
+- System provides a wireless interface which users may upload still images to
+- System does not require multiple power sources
+- System must be safe to touch without harming the user
+- System can be manually powered on or off without shutting off power
+- System must be powered from an easily accessible power source (Wall outlet, Battery)
+
+Non-functional:
+- System MUST handle a minimum rate of 24 still frames per seconnd
+- System MUST display at least 24 frames per seconnd
+- System SHOULD support a resolution of eiter 64x128 or 128x256
+- System SHOULD be the height of a 16.9 oz water bottle
+- System MUST support an 8-bit resolution
+- System MUST have a mean time to failure of greater than X
+- System MUST support continous use of at least 4 hours
