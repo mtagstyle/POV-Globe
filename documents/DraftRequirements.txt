@@ -1,0 +1,28 @@
+Functional:
+- System must use persistence of vision to display an image
+- System must be able to control where the position of the image is shown with respect to the viewer
+- System must retain the last image that was sent to it, and constantly display it until a new one is sent
+- System must physically support itself (Sturdy)
+- System provides an interface which users may upload still images to
+- System must be safe to touch without harming the user
+- System can be manually powered on or off without shutting off power
+- System must be powered from an easily accessible power source (Wall outlet, Battery)
+
+Non-functional:
+- System SHOULD support a resolution of either 64x128 or 128x256
+- System SHOULD be scalable (Not much rework required to add new or more functionality)
+- System SHOULD be the height of 8 inches (Height of a 500 ml water bottle)
+- System SHOULD keep the user interface flexible to allow other things to change (i.e.: Cabled connection, ANT, etc.)
+- System MUST be PCB'ed
+- System should have modular mechanical parts
+
+Discussion Items:
+- System does not require multiple power sources
+- System SHOULD be able to support images being sent at a rate of 15 images/second
+- Cost effective (0-200, 200-500, 500-1000, 1000+)
+
+Research Feasibility:
+- 2D plane vs 3D plane
+- System must be able to display colored images
+  - System MUST support an 8-bit color depth
+- Rotation speed controllable or limited
