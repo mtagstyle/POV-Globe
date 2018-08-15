@@ -40,9 +40,9 @@ Examples:
   * Prototype created
   
 *  Milestone 5: Rotating Component - Software
-- Software Architecture
-- Software Implementation
-- Software Interfaces
+  * Software Architecture
+  * Software Implementation
+  * Software Interfaces
 
 # Design Overview
 
