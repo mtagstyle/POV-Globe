@@ -19,21 +19,30 @@ Examples:
 - Honing technical skills (PCB Design, Mechanical Design, System Design, Firmware Development, Power Electronics)
 
 # Goal(s)
-* Milestone 1: Proof-of-concept prototype
-  * A base station that is able to rotate a rotating component
-  * A rotating component that can display a "hello world" type of example
+* Milestone 1: System Design
+  * Requirements created for overall system (1.5 Weeks)
+  * System design documents created: Basic block diagram (2 weeks)
+  * External Interfaces (0.5 weeks) (Logical Level)
   
-* Milestone 2: Final Design
-  * Improve any limitations discovered in milestone 1
-  * Have an actual formalized design based offf of the prototype
-  * Add in any functionality that may be missing from milestone 1
+* Milestone 2: Prototype Power Delivery
+  * Power Delivery Solution
+  * Design documents created
+  * Prototype created
   
-* Milestone 3: Adding new features
-  * Improve any limitations discovered in milestone 2
-  * Brainstorm
-  * IoT integration: Support for Wifi, Bluetooth, ANT?
-  * Supply an API that may send image data to the POV display  
+* Milestone 3: Mechanical Fixture Creation, Dynamics
+  * Safety concerns noted
+  * Mechanical drawings of how components are mounted
+  * How components will move dynamically 
+
+* Milestone 4: Rotating Component - Hardware
+  * MCU selection, sensor selection, LED driver circuitry, Power Receiver selection, Radio ???
+  * Design documents created
+  * Prototype created
   
+*  Milestone 5: Rotating Component - Software
+- Software Architecture
+- Software Implementation
+- Software Interfaces
 
 # Design Overview
 
@@ -49,31 +58,7 @@ Mechanical Fixture | This component represents the fixture used to hold all of t
 Firmware (Drivers) | This component is the code that is used to address/drive the segment of LEDs as well as detecting at what time intervals to turn them on/off.
 Firmware (Applications/Middleware) | This component represents the design of the operating environment that the host environment will run on, how the drivers will interact with the application program, as well as the design of the interfaces that will be exposed to the outside world.
 
-*** TBD^ Update ^ ** 
-Component 1 (System Design):
-- Requirements created for overall system (1.5 Weeks)
-- System design documents created: Basic block diagram (2 weeks)
-- External Interfaces (0.5 weeks) (Logical Level)
 
-Component 2 (Prototype Power Delivery): 
-- Power Delivery Solution
-  - Design documents created
-  - Prototype created
-  
-Component 3 (Mechanical Fixture Creation, Dynamics):
-- Safety concerns noted
-- Mechanical drawings of how components are mounted
-- How components will move dynamically 
-
-Component 4 (Rotating Component - Hardware):
-- MCU selection, sensor selection, LED driver circuitry, Power Receiver selection, Radio ???
-- Design documents created
-- Prototype created
-
-Component 5 (Rotating Component - Software):
-- Software Architecture
-- Software Implementation
-- Software Interfaces 
 
 # Implementation Overview
 
