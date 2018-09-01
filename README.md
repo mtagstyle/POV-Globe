@@ -62,6 +62,8 @@ Firmware (Applications/Middleware) | This component represents the design of the
 
 # Implementation Overview
 
+Implementation details may be found under my confluence page at: projectshiba.trananthony.ca:8090
+
 ### Folder Structure
 
 - firmware: Contains all of the source code
