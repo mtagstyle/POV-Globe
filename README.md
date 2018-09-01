@@ -1,6 +1,6 @@
 # Project Shiba
 
-This repo will will be used to capture any information regarding the research, design, and implementation of a persistence-of-vision (PoV) display
+This repo will will be used to capture any information regarding the research, design, and implementation of a persistence-of-vision (PoV) display. For more information, visit http://projectshiba.trananthony.ca:8090
 
 # What is it?
 
@@ -62,7 +62,7 @@ Firmware (Applications/Middleware) | This component represents the design of the
 
 # Implementation Overview
 
-Implementation details may be found under my confluence page at: projectshiba.trananthony.ca:8090
+Implementation details may be found under my confluence page at: http://projectshiba.trananthony.ca:8090
 
 ### Folder Structure
 
