@@ -37,42 +37,42 @@ remduplicates = $(strip $(if $1,$(firstword $1) $(call remduplicates,$(filter-ou
 
 #source common to all targets
 C_SOURCE_FILES += \
-$(abspath ../../../../../components/toolchain/system_nrf51.c) \
-$(abspath ../../main.c) \
-$(abspath ../../../../../components/libraries/util/app_error.c) \
-$(abspath ../../../../../components/libraries/fifo/app_fifo.c) \
-$(abspath ../../../../../components/libraries/util/app_util_platform.c) \
-$(abspath ../../../../../components/libraries/util/nrf_assert.c) \
-$(abspath ../../../../../components/libraries/uart/retarget.c) \
-$(abspath ../../../../../components/libraries/uart/app_uart_fifo.c) \
-$(abspath ../../../../../components/drivers_nrf/delay/nrf_delay.c) \
-$(abspath ../../../../../components/drivers_nrf/common/nrf_drv_common.c) \
-$(abspath ../../../../../components/drivers_nrf/ppi/nrf_drv_ppi.c) \
-$(abspath ../../../../../components/drivers_nrf/timer/nrf_drv_timer.c) \
-$(abspath ../../../../../components/drivers_nrf/uart/nrf_drv_uart.c) \
+$(shell cygpath -aw ../../../../../components/toolchain/system_nrf51.c) \
+$(shell cygpath -aw ../../main.c) \
+$(shell cygpath -aw ../../../../../components/libraries/util/app_error.c) \
+$(shell cygpath -aw ../../../../../components/libraries/fifo/app_fifo.c) \
+$(shell cygpath -aw ../../../../../components/libraries/util/app_util_platform.c) \
+$(shell cygpath -aw ../../../../../components/libraries/util/nrf_assert.c) \
+$(shell cygpath -aw ../../../../../components/libraries/uart/retarget.c) \
+$(shell cygpath -aw ../../../../../components/libraries/uart/app_uart_fifo.c) \
+$(shell cygpath -aw ../../../../../components/drivers_nrf/delay/nrf_delay.c) \
+$(shell cygpath -aw ../../../../../components/drivers_nrf/common/nrf_drv_common.c) \
+$(shell cygpath -aw ../../../../../components/drivers_nrf/ppi/nrf_drv_ppi.c) \
+$(shell cygpath -aw ../../../../../components/drivers_nrf/timer/nrf_drv_timer.c) \
+$(shell cygpath -aw ../../../../../components/drivers_nrf/uart/nrf_drv_uart.c) \
 
 #assembly files common to all targets
-ASM_SOURCE_FILES  = $(abspath ../../../../../components/toolchain/gcc/gcc_startup_nrf51.s)
+ASM_SOURCE_FILES  = $(shell cygpath -aw ../../../../../components/toolchain/gcc/gcc_startup_nrf51.s)
 
 #includes common to all targets
-INC_PATHS  = -I$(abspath ../../config/ppi_pca10028)
-INC_PATHS += -I$(abspath ../../config)
-INC_PATHS += -I$(abspath ../../../../bsp)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/ppi)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/nrf_soc_nosd)
-INC_PATHS += -I$(abspath ../../../../../components/device)
-INC_PATHS += -I$(abspath ../../../../../components/libraries/uart)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/hal)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/timer)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/delay)
-INC_PATHS += -I$(abspath ../..)
-INC_PATHS += -I$(abspath ../../../../../components/libraries/util)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/uart)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/common)
-INC_PATHS += -I$(abspath ../../../../../components/toolchain)
-INC_PATHS += -I$(abspath ../../../../../components/drivers_nrf/config)
-INC_PATHS += -I$(abspath ../../../../../components/libraries/fifo)
-INC_PATHS += -I$(abspath ../../../../../components/toolchain/gcc)
+INC_PATHS  = -I$(shell cygpath -aw ../../config/ppi_pca10028)
+INC_PATHS += -I$(shell cygpath -aw ../../config)
+INC_PATHS += -I$(shell cygpath -aw ../../../../bsp)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/ppi)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/nrf_soc_nosd)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/device)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/libraries/uart)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/hal)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/timer)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/delay)
+INC_PATHS += -I$(shell cygpath -aw ../..)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/libraries/util)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/uart)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/common)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/toolchain)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/config)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/libraries/fifo)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/toolchain/gcc)
 
 OBJECT_DIRECTORY = _build
 LISTING_DIRECTORY = $(OBJECT_DIRECTORY)
@@ -94,8 +94,9 @@ CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
 CFLAGS += -fno-builtin --short-enums
 
 # keep every function in separate section. This will allow linker to dump unused functions
-LDFLAGS += -Xlinker -Map=$(LISTING_DIRECTORY)/$(OUTPUT_FILENAME).map
-LDFLAGS += -mthumb -mabi=aapcs -L $(TEMPLATE_PATH) -T$(LINKER_SCRIPT)
+LDFLAGS += -Xlinker -Map=$(shell cygpath -aw $(LISTING_DIRECTORY)\$(OUTPUT_FILENAME).map)
+LDFLAGS += -mthumb -mabi=aapcs -L $(shell cygpath -aw $(TEMPLATE_PATH)) -T$(LINKER_SCRIPT)
+
 LDFLAGS += -mcpu=cortex-m0
 # let linker to dump unused sections
 LDFLAGS += -Wl,--gc-sections
@@ -129,16 +130,17 @@ ASM_SOURCE_FILE_NAMES = $(notdir $(ASM_SOURCE_FILES))
 ASM_PATHS = $(call remduplicates, $(dir $(ASM_SOURCE_FILES) ))
 ASM_OBJECTS = $(addprefix $(OBJECT_DIRECTORY)/, $(ASM_SOURCE_FILE_NAMES:.s=.o) )
 
-vpath %.c $(C_PATHS)
-vpath %.s $(ASM_PATHS)
+vpath %.c $(shell cygpath $(C_PATHS))
+vpath %.s $(shell cygpath $(ASM_PATHS))
 
 OBJECTS = $(C_OBJECTS) $(ASM_OBJECTS)
 
 nrf51422_xxac: OUTPUT_FILENAME := nrf51422_xxac
-nrf51422_xxac: LINKER_SCRIPT=ppi_gcc_nrf51.ld
+nrf51422_xxac: LINKER_SCRIPT=$(shell cygpath -aw ppi_gcc_nrf51.ld)
 nrf51422_xxac: $(BUILD_DIRECTORIES) $(OBJECTS)
+	echo $(LINKER_SCRIPT)
 	@echo Linking target: $(OUTPUT_FILENAME).out
-	$(NO_ECHO)$(CC) $(LDFLAGS) $(OBJECTS) $(LIBS) -o $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out
+	$(NO_ECHO)$(CC) $(LDFLAGS) $(shell cygpath -aw $(OBJECTS)) $(LIBS) -o $(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out)
 	$(NO_ECHO)$(MAKE) -f $(MAKEFILE_NAME) -C $(MAKEFILE_DIR) -e finalize
 
 ## Create build directories
@@ -149,44 +151,42 @@ $(BUILD_DIRECTORIES):
 # Create objects from C SRC files
 $(OBJECT_DIRECTORY)/%.o: %.c
 	@echo Compiling file: $(notdir $<)
-	$(NO_ECHO)$(CC) $(CFLAGS) $(INC_PATHS) -c -o $@ $<
+	$(NO_ECHO)$(CC) $(CFLAGS) $(INC_PATHS) -c -o $(shell cygpath -aw $@) $(shell cygpath -aw $<)
 
 # Assemble files
 $(OBJECT_DIRECTORY)/%.o: %.s
 	@echo Compiling file: $(notdir $<)
-	$(NO_ECHO)$(CC) $(ASMFLAGS) $(INC_PATHS) -c -o $@ $<
-
+	$(NO_ECHO)$(CC) $(ASMFLAGS) $(INC_PATHS) -c -o $(shell cygpath -aw $@) $(shell cygpath -aw $<)
 
 # Link
 $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out: $(BUILD_DIRECTORIES) $(OBJECTS)
 	@echo Linking target: $(OUTPUT_FILENAME).out
-	$(NO_ECHO)$(CC) $(LDFLAGS) $(OBJECTS) $(LIBS) -o $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out
-
+	$(NO_ECHO)$(CC) $(LDFLAGS) $(shell cygpath -aw $(OBJECTS)) $(LIBS) -o "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out)"
 
 ## Create binary .bin file from the .out file
 $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).bin: $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out
 	@echo Preparing: $(OUTPUT_FILENAME).bin
-	$(NO_ECHO)$(OBJCOPY) -O binary $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).bin
+	$(NO_ECHO)$(OBJCOPY) -O binary "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out)" "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).bin)"
 
 ## Create binary .hex file from the .out file
 $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).hex: $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out
 	@echo Preparing: $(OUTPUT_FILENAME).hex
-	$(NO_ECHO)$(OBJCOPY) -O ihex $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).hex
+	$(NO_ECHO)$(OBJCOPY) -O ihex "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out)" "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).hex)"
 
 finalize: genbin genhex echosize
 
 genbin:
 	@echo Preparing: $(OUTPUT_FILENAME).bin
-	$(NO_ECHO)$(OBJCOPY) -O binary $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).bin
+	$(NO_ECHO)$(OBJCOPY) -O binary "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out)" "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).bin)"
 
 ## Create binary .hex file from the .out file
 genhex: 
 	@echo Preparing: $(OUTPUT_FILENAME).hex
-	$(NO_ECHO)$(OBJCOPY) -O ihex $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).hex
+	$(NO_ECHO)$(OBJCOPY) -O ihex "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out)" "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).hex)"
 
 echosize:
 	-@echo ''
-	$(NO_ECHO)$(SIZE) $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out
+	$(NO_ECHO)$(SIZE) "$(shell cygpath -aw $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out)"
 	-@echo ''
 
 clean:
@@ -195,9 +195,13 @@ clean:
 cleanobj:
 	$(RM) $(BUILD_DIRECTORIES)/*.o
 
-flash: $(MAKECMDGOALS)
+flash: nrf51422_xxac
 	@echo Flashing: $(OUTPUT_BINARY_DIRECTORY)/$<.hex
-	nrfjprog --program $(OUTPUT_BINARY_DIRECTORY)/$<.hex -f nrf51  --chiperase
+	nrfjprog --program $(OUTPUT_BINARY_DIRECTORY)/$<.hex -f nrf51  --sectorerase
 	nrfjprog --reset
 
 ## Flash softdevice
+flash_softdevice:
+	@echo Flashing: s210_nrf51422_5.0.0_softdevice.hex 
+	nrfjprog --program $(shell cygpath.exe -aw ../../../../../../components/softdevice/s210/hex/s210_nrf51422_5.0.0_softdevice.hex) -f nrf51 --chiperase
+	nrfjprog --reset
