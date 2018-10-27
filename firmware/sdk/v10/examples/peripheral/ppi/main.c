@@ -32,8 +32,17 @@
 #include "nrf_drv_timer.h"
 #include "nordic_common.h"
 
-#define UART_TX_BUF_SIZE 256                                                          /**< UART TX buffer size. */
-#define UART_RX_BUF_SIZE 1                                                            /**< UART RX buffer size. */
+#define TIMER0_COMPARE_VALUE 6  // (0.35 us/(0.0625 us/tick)) == ~ 5.6  ticks)
+#define TIMER1_COMPARE_VALUE 14 // (0.9  us/(0.0625 us/tick)) == ~ 14.4 ticks)
+#define TIMER2_COMPARE_VALUE 20 // (1.25 us/(0.0625 us/tick)) ==   20 ticks  )
+
+/**
+ * Frequency     - 16 MHz
+ * Mode          - Timer mode
+ * Bit Width     - 32
+ * Callback args - None
+ */
+nrf_drv_timer_config_t timer_config = {NRF_TIMER_FREQ_16MHz, NRF_TIMER_MODE_TIMER, NRF_TIMER_BIT_WIDTH_32, 1, NULL};
 
 const nrf_drv_timer_t timer0 = NRF_DRV_TIMER_INSTANCE(0);
 const nrf_drv_timer_t timer1 = NRF_DRV_TIMER_INSTANCE(1);
@@ -41,23 +50,39 @@ const nrf_drv_timer_t timer2 = NRF_DRV_TIMER_INSTANCE(2);
 
 nrf_ppi_channel_t ppi_channel1, ppi_channel2;
 
-void uart_error_handle(app_uart_evt_t * p_event)
-{
-    if (p_event->evt_type == APP_UART_COMMUNICATION_ERROR)
-    {
-        APP_ERROR_HANDLER(p_event->data.error_communication);
-    }
-    else if (p_event->evt_type == APP_UART_FIFO_ERROR)
-    {
-        APP_ERROR_HANDLER(p_event->data.error_code);
-    }
-}
-
 // Timer even handler. Not used since timer is used only for PPI.
 void timer_event_handler(nrf_timer_event_t event_type, void * p_context){}
 
+static void init()
+{
+    // Initialize PPI peripheral
+    uint32_t error = NRF_SUCCESS;
+    error = nrf_drv_ppi_init();
+    APP_ERROR_CHECK(error);
+    // Initialize timers
+    error = nrf_drv_timer_init(&timer0, &timer_config, timer_event_handler);
+    APP_ERROR_CHECK(error);
+    error = nrf_drv_timer_init(&timer1, &timer_config, timer_event_handler);
+    APP_ERROR_CHECK(error);
+    error = nrf_drv_timer_init(&timer2, &timer_config, timer_event_handler);
+    APP_ERROR_CHECK(error);
+
+    // Timer 0, cutoff should be 0.35 us
+    nrf_drv_timer_extended_compare(&timer0, NRF_TIMER_CC_CHANNEL0, TIMER0_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, false);
+    APP_ERROR_CHECK(error);
+
+    // Timer 1, cutoff should be 0.9 us
+    nrf_drv_timer_extended_compare(&timer1, NRF_TIMER_CC_CHANNEL1, TIMER1_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE1_CLEAR_MASK, false);
+    APP_ERROR_CHECK(error);
+
+    // Timer 2, cutoff should be 1.25 us, interrupt here since it is the end of the sequence
+    nrf_drv_timer_extended_compare(&timer2, NRF_TIMER_CC_CHANNEL2, TIMER2_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE2_CLEAR_MASK, true);
+    APP_ERROR_CHECK(error);
+}
+
 /** @brief Function for initializing the PPI peripheral.
 */
+/*
 static void ppi_init(void)
 {
     uint32_t err_code = NRF_SUCCESS;
@@ -87,84 +112,14 @@ static void ppi_init(void)
     err_code = nrf_drv_ppi_channel_enable(ppi_channel2);
     APP_ERROR_CHECK(err_code);
 }
-
-
-/** @brief Function for Timer 0 initialization, which will be started and stopped by timer1 and timer2 using PPI.
 */
-static void timer0_init(void)
-{
-    ret_code_t err_code = nrf_drv_timer_init(&timer0, NULL, timer_event_handler);
-    APP_ERROR_CHECK(err_code);
-}
-
-
-/** @brief Function for Timer 1 initialization.
- *  @details Initializes Timer 1 peripheral, creates event and interrupt every 2 seconds,
- *           by configuring CC[0] to timer overflow value, we create events at even number of seconds
- *           for example, events are created at 2,4,6 ... seconds. This event can be used to stop Timer 0
- *           with Timer1->Event_Compare[0] triggering Timer 0 TASK_STOP through PPI.
-*/
-static void timer1_init(void)
-{
-    // Configure Timer 1 to overflow every 2 seconds. Check TIMER1 configuration for details
-    // The overflow occurs every 0xFFFF/(SysClk/2^PRESCALER).
-    // = 65535/31250 = 2.097 sec
-    ret_code_t err_code = nrf_drv_timer_init(&timer1, NULL, timer_event_handler);
-    APP_ERROR_CHECK(err_code);
-
-    nrf_drv_timer_extended_compare(&timer1, NRF_TIMER_CC_CHANNEL0, 0xFFFFUL, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, false);
-}
-
-
-/** @brief Function for Timer 2 initialization.
- *  @details Initializes Timer 2 peripheral, creates event and interrupt every 2 seconds
- *           by configuring CC[0] to half of timer overflow value. Events are created at odd number of seconds.
- *           For example, events are created at 1,3,5,... seconds. This event can be used to start Timer 0
- *           with Timer2->Event_Compare[0] triggering Timer 0 TASK_START through PPI.
-*/
-static void timer2_init(void)
-{
-    // Generate interrupt/event when half of time before the timer overflows has past, that is at 1,3,5,7... seconds from start.
-    // Check TIMER1 configuration for details
-    // now the overflow occurs every 0xFFFF/(SysClk/2^PRESCALER)
-    // = 65535/31250 = 2.097 sec */
-    ret_code_t err_code = nrf_drv_timer_init(&timer2, NULL, timer_event_handler);
-    APP_ERROR_CHECK(err_code);
-
-    nrf_drv_timer_extended_compare(&timer2, NRF_TIMER_CC_CHANNEL0, 0x7FFFUL, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, false);
-}
-
-
 /**
  * @brief Function for application main entry.
  */
 int main(void)
 {
-    timer0_init(); // Timer used to blink the LEDs.
-    timer1_init(); // Timer to generate events on even number of seconds.
-    timer2_init(); // Timer to generate events on odd number of seconds.
-    ppi_init();    // PPI to redirect the event to timer start/stop tasks.
-
-    uint32_t err_code;
-    const app_uart_comm_params_t comm_params =
-     {
-         RX_PIN_NUMBER,
-         TX_PIN_NUMBER,
-         RTS_PIN_NUMBER,
-         CTS_PIN_NUMBER,
-         APP_UART_FLOW_CONTROL_ENABLED,
-         false,
-         UART_BAUDRATE_BAUDRATE_Baud38400
-     };
-
-    APP_UART_FIFO_INIT(&comm_params,
-                    UART_RX_BUF_SIZE,
-                    UART_TX_BUF_SIZE,
-                    uart_error_handle,
-                    APP_IRQ_PRIORITY_LOW,
-                    err_code);
-
-    APP_ERROR_CHECK(err_code);
+    init();
+    //ppi_init();    // PPI to redirect the event to timer start/stop tasks.
 
     // Enabling constant latency as indicated by PAN 11 "HFCLK: Base current with HFCLK 
     // running is too high" found at Product Anomaly document found at
@@ -183,7 +138,6 @@ int main(void)
     // Loop and increment the timer count value and capture value into LEDs. @note counter is only incremented between TASK_START and TASK_STOP.
     while (true)
     {
-
         printf("Current cout: %d\n\r", (int)nrf_drv_timer_capture(&timer0,NRF_TIMER_CC_CHANNEL0));
 
         /* increment the counter */
