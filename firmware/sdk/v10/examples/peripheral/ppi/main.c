@@ -21,15 +21,21 @@
 *
 */
 
+
+#define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS 1
+#define GPIOTE_CONFIG_IRQ_PRIORITY APP_IRQ_PRIORITY_LOW
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include "nrf_delay.h"
-#include "app_uart.h"
-#include "app_error.h"
-#include "boards.h"
+#include "nrf_gpiote.h"
+#include "nrf_gpio.h"
+#include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
 #include "nrf_drv_timer.h"
+#include "app_error.h"
+#include "boards.h"
 #include "nordic_common.h"
 
 #define TIMER0_COMPARE_VALUE 6  // (0.35 us/(0.0625 us/tick)) == ~ 5.6  ticks)
@@ -42,18 +48,38 @@
  * Bit Width     - 32
  * Callback args - None
  */
-nrf_drv_timer_config_t timer_config = {NRF_TIMER_FREQ_16MHz, NRF_TIMER_MODE_TIMER, NRF_TIMER_BIT_WIDTH_32, 1, NULL};
+nrf_drv_timer_config_t       timer_config = {NRF_TIMER_FREQ_16MHz, NRF_TIMER_MODE_TIMER, NRF_TIMER_BIT_WIDTH_32, 1, NULL};
+nrf_drv_gpiote_out_config_t  gpio_config  = {NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_LOW, true};
 
 const nrf_drv_timer_t timer0 = NRF_DRV_TIMER_INSTANCE(0);
 const nrf_drv_timer_t timer1 = NRF_DRV_TIMER_INSTANCE(1);
 const nrf_drv_timer_t timer2 = NRF_DRV_TIMER_INSTANCE(2);
 
+#define GPIO_OUTPUT_PIN_NUMBER 9
+
 nrf_ppi_channel_t ppi_channel1, ppi_channel2;
 
 // Timer even handler. Not used since timer is used only for PPI.
-void timer_event_handler(nrf_timer_event_t event_type, void * p_context){}
+void timer_event_handler(nrf_timer_event_t event_type, void * p_context)
+{
+    // Turn GPIO on
+    nrf_drv_gpiote_out_task_force(GPIO_OUTPUT_PIN_NUMBER, 1);
 
-static void init()
+/*
+    // Reset all timers and turn them on
+    nrf_drv_timer_enable(&timer0);
+    nrf_drv_timer_enable(&timer1);
+    nrf_drv_timer_enable(&timer2);
+    */
+}
+
+static void init_gpio()
+{
+    nrf_drv_gpiote_init();
+    nrf_drv_gpiote_out_init(GPIO_OUTPUT_PIN_NUMBER, &gpio_config);
+}
+
+static void init_timer()
 {
     // Initialize PPI peripheral
     uint32_t error = NRF_SUCCESS;
@@ -82,8 +108,8 @@ static void init()
 
 /** @brief Function for initializing the PPI peripheral.
 */
-/*
-static void ppi_init(void)
+
+static void init_ppi(void)
 {
     uint32_t err_code = NRF_SUCCESS;
 
@@ -93,32 +119,27 @@ static void ppi_init(void)
     // Configure 1st available PPI channel to stop TIMER0 counter on TIMER1 COMPARE[0] match, which is every even number of seconds.
     err_code = nrf_drv_ppi_channel_alloc(&ppi_channel1);
     APP_ERROR_CHECK(err_code);
-    err_code = nrf_drv_ppi_channel_assign(ppi_channel1,
-                                          nrf_drv_timer_event_address_get(&timer1, NRF_TIMER_EVENT_COMPARE0),
-                                          nrf_drv_timer_task_address_get(&timer0, NRF_TIMER_TASK_STOP));
+    
+    // Connect the timer1 event to toggle the gpio (Should turn off)
+    err_code = nrf_drv_ppi_channel_assign(ppi_channel1, nrf_drv_timer_event_address_get(&timer1, NRF_TIMER_EVENT_COMPARE1), nrf_drv_gpiote_out_task_addr_get(GPIO_OUTPUT_PIN_NUMBER));
+
     APP_ERROR_CHECK(err_code);
 
-    // Configure 2nd available PPI channel to start timer0 counter at TIMER2 COMPARE[0] match, which is every odd number of seconds.
-    err_code = nrf_drv_ppi_channel_alloc(&ppi_channel2);
-    APP_ERROR_CHECK(err_code);
-    err_code = nrf_drv_ppi_channel_assign(ppi_channel2,
-                                          nrf_drv_timer_event_address_get(&timer2, NRF_TIMER_EVENT_COMPARE0),
-                                          nrf_drv_timer_task_address_get(&timer0, NRF_TIMER_TASK_START));
-    APP_ERROR_CHECK(err_code);
-
-    // Enable both configured PPI channels
+    // Enable both configured PPI channel and GPIO Task
     err_code = nrf_drv_ppi_channel_enable(ppi_channel1);
     APP_ERROR_CHECK(err_code);
-    err_code = nrf_drv_ppi_channel_enable(ppi_channel2);
-    APP_ERROR_CHECK(err_code);
+    
+    nrf_drv_gpiote_out_task_enable(GPIO_OUTPUT_PIN_NUMBER);
 }
-*/
+
 /**
  * @brief Function for application main entry.
  */
 int main(void)
 {
-    init();
+    init_timer();
+    init_gpio();
+    init_ppi();
     //ppi_init();    // PPI to redirect the event to timer start/stop tasks.
 
     // Enabling constant latency as indicated by PAN 11 "HFCLK: Base current with HFCLK 
@@ -130,20 +151,13 @@ int main(void)
     //       PPI (shown in this example) and low power mode simultaneously.
     NRF_POWER->TASKS_CONSTLAT = 1;
     
-    // Start clock.
-    nrf_drv_timer_enable(&timer0);
-    nrf_drv_timer_enable(&timer1);
-    nrf_drv_timer_enable(&timer2);
+    nrf_timer_event_t event = {0};
+    timer_event_handler(event, NULL);
 
     // Loop and increment the timer count value and capture value into LEDs. @note counter is only incremented between TASK_START and TASK_STOP.
     while (true)
     {
-        printf("Current cout: %d\n\r", (int)nrf_drv_timer_capture(&timer0,NRF_TIMER_CC_CHANNEL0));
-
-        /* increment the counter */
-        nrf_drv_timer_increment(&timer0);
-
-        nrf_delay_ms(100);
+        
     }
 }
 

@@ -53,7 +53,6 @@ static void led_blinking_setup()
     err_code = nrf_drv_gpiote_out_init(GPIO_OUTPUT_PIN_NUMBER, &config);
     APP_ERROR_CHECK(err_code);
 
-
     nrf_drv_timer_extended_compare(&timer, (nrf_timer_cc_channel_t)0, 200*1000UL, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, false);
 
     err_code = nrf_drv_ppi_channel_alloc(&ppi_channel);

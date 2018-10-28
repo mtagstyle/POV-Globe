@@ -48,6 +48,7 @@ $(shell cygpath -aw ../../../../../components/libraries/uart/app_uart_fifo.c) \
 $(shell cygpath -aw ../../../../../components/drivers_nrf/delay/nrf_delay.c) \
 $(shell cygpath -aw ../../../../../components/drivers_nrf/common/nrf_drv_common.c) \
 $(shell cygpath -aw ../../../../../components/drivers_nrf/ppi/nrf_drv_ppi.c) \
+$(shell cygpath -aw ../../../../../components/drivers_nrf/gpiote/nrf_drv_gpiote.c) \
 $(shell cygpath -aw ../../../../../components/drivers_nrf/timer/nrf_drv_timer.c) \
 $(shell cygpath -aw ../../../../../components/drivers_nrf/uart/nrf_drv_uart.c) \
 
@@ -65,6 +66,7 @@ INC_PATHS += -I$(shell cygpath -aw ../../../../../components/libraries/uart)
 INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/hal)
 INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/timer)
 INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/delay)
+INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/gpiote)
 INC_PATHS += -I$(shell cygpath -aw ../..)
 INC_PATHS += -I$(shell cygpath -aw ../../../../../components/libraries/util)
 INC_PATHS += -I$(shell cygpath -aw ../../../../../components/drivers_nrf/uart)
