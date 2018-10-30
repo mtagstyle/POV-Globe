@@ -49,28 +49,41 @@
  * Callback args - None
  */
 nrf_drv_timer_config_t       timer_config = {NRF_TIMER_FREQ_16MHz, NRF_TIMER_MODE_TIMER, NRF_TIMER_BIT_WIDTH_32, 1, NULL};
-nrf_drv_gpiote_out_config_t  gpio_config  = {NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_LOW, true};
+nrf_drv_gpiote_out_config_t  gpio_config  = {NRF_GPIOTE_POLARITY_HITOLO, NRF_GPIOTE_INITIAL_VALUE_LOW, true};
 
 const nrf_drv_timer_t timer0 = NRF_DRV_TIMER_INSTANCE(0);
 const nrf_drv_timer_t timer1 = NRF_DRV_TIMER_INSTANCE(1);
 const nrf_drv_timer_t timer2 = NRF_DRV_TIMER_INSTANCE(2);
 
-#define GPIO_OUTPUT_PIN_NUMBER 9
+#define GPIO_OUTPUT_PIN_NUMBER 12
 
 nrf_ppi_channel_t ppi_channel1, ppi_channel2;
 
 // Timer even handler. Not used since timer is used only for PPI.
 void timer_event_handler(nrf_timer_event_t event_type, void * p_context)
 {
+    nrf_drv_timer_clear(&timer0);
+    nrf_drv_timer_clear(&timer1);
+    nrf_drv_timer_clear(&timer2);
+
     // Turn GPIO on
     nrf_drv_gpiote_out_task_force(GPIO_OUTPUT_PIN_NUMBER, 1);
 
-/*
+    // Reset all timers and turn them on
+    //nrf_drv_timer_resume(&timer0);
+    nrf_drv_timer_resume(&timer1);
+    nrf_drv_timer_resume(&timer2);
+}
+
+void start_shit()
+{
+    // Turn GPIO on
+    nrf_drv_gpiote_out_task_force(GPIO_OUTPUT_PIN_NUMBER, 1);
+
     // Reset all timers and turn them on
     nrf_drv_timer_enable(&timer0);
     nrf_drv_timer_enable(&timer1);
     nrf_drv_timer_enable(&timer2);
-    */
 }
 
 static void init_gpio()
@@ -81,10 +94,8 @@ static void init_gpio()
 
 static void init_timer()
 {
-    // Initialize PPI peripheral
     uint32_t error = NRF_SUCCESS;
-    error = nrf_drv_ppi_init();
-    APP_ERROR_CHECK(error);
+
     // Initialize timers
     error = nrf_drv_timer_init(&timer0, &timer_config, timer_event_handler);
     APP_ERROR_CHECK(error);
@@ -94,15 +105,15 @@ static void init_timer()
     APP_ERROR_CHECK(error);
 
     // Timer 0, cutoff should be 0.35 us
-    nrf_drv_timer_extended_compare(&timer0, NRF_TIMER_CC_CHANNEL0, TIMER0_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, false);
+    nrf_drv_timer_extended_compare(&timer0, NRF_TIMER_CC_CHANNEL0, TIMER0_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE0_STOP_MASK, false);
     APP_ERROR_CHECK(error);
 
     // Timer 1, cutoff should be 0.9 us
-    nrf_drv_timer_extended_compare(&timer1, NRF_TIMER_CC_CHANNEL1, TIMER1_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE1_CLEAR_MASK, false);
+    nrf_drv_timer_extended_compare(&timer1, NRF_TIMER_CC_CHANNEL1, TIMER1_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE1_STOP_MASK, false);
     APP_ERROR_CHECK(error);
 
     // Timer 2, cutoff should be 1.25 us, interrupt here since it is the end of the sequence
-    nrf_drv_timer_extended_compare(&timer2, NRF_TIMER_CC_CHANNEL2, TIMER2_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE2_CLEAR_MASK, true);
+    nrf_drv_timer_extended_compare(&timer2, NRF_TIMER_CC_CHANNEL2, TIMER2_COMPARE_VALUE, NRF_TIMER_SHORT_COMPARE2_STOP_MASK, true);
     APP_ERROR_CHECK(error);
 }
 
@@ -113,6 +124,7 @@ static void init_ppi(void)
 {
     uint32_t err_code = NRF_SUCCESS;
 
+    // Initialize PPI peripheral
     err_code = nrf_drv_ppi_init();
     APP_ERROR_CHECK(err_code);
 
@@ -140,19 +152,10 @@ int main(void)
     init_timer();
     init_gpio();
     init_ppi();
-    //ppi_init();    // PPI to redirect the event to timer start/stop tasks.
 
-    // Enabling constant latency as indicated by PAN 11 "HFCLK: Base current with HFCLK 
-    // running is too high" found at Product Anomaly document found at
-    // https://www.nordicsemi.com/eng/Products/Bluetooth-R-low-energy/nRF51822/#Downloads
-    //
-    // @note This example does not go to low power mode therefore constant latency is not needed.
-    //       However this setting will ensure correct behaviour when routing TIMER events through 
-    //       PPI (shown in this example) and low power mode simultaneously.
-    NRF_POWER->TASKS_CONSTLAT = 1;
-    
-    nrf_timer_event_t event = {0};
-    timer_event_handler(event, NULL);
+    //nrf_timer_event_t event = NRF_TIMER_EVENT_COMPARE2;
+    //timer_event_handler(event, NULL);
+    start_shit();
 
     // Loop and increment the timer count value and capture value into LEDs. @note counter is only incremented between TASK_START and TASK_STOP.
     while (true)
