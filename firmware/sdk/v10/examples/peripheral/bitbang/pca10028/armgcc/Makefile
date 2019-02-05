@@ -38,6 +38,7 @@ remduplicates = $(strip $(if $1,$(firstword $1) $(call remduplicates,$(filter-ou
 #source common to all targets
 C_SOURCE_FILES += \
 $(shell cygpath -aw ../../../../../components/toolchain/system_nrf51.c) \
+$(shell cygpath -aw ../../led_driver.c) \
 $(shell cygpath -aw ../../main.c) \
 $(shell cygpath -aw ../../../../../components/libraries/util/app_error.c) \
 $(shell cygpath -aw ../../../../../components/libraries/fifo/app_fifo.c) \
@@ -89,11 +90,12 @@ CFLAGS += -DBOARD_PCA10028
 CFLAGS += -DBSP_DEFINES_ONLY
 CFLAGS += -mcpu=cortex-m0
 CFLAGS += -mthumb -mabi=aapcs --std=gnu99
-CFLAGS += -Wall -Werror -O3
+CFLAGS += -Wall -O3
 CFLAGS += -mfloat-abi=soft
 # keep every function in separate section. This will allow linker to dump unused functions
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
 CFLAGS += -fno-builtin --short-enums
+CFLAGS += -funroll-all-loops
 
 # keep every function in separate section. This will allow linker to dump unused functions
 LDFLAGS += -Xlinker -Map=$(shell cygpath -aw $(LISTING_DIRECTORY)\$(OUTPUT_FILENAME).map)

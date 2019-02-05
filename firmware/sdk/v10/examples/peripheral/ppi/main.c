@@ -38,9 +38,9 @@
 #include "boards.h"
 #include "nordic_common.h"
 
-#define TIMER0_COMPARE_VALUE 5  // (0.35 us/(0.0625 us/tick)) == ~ 5.6  ticks)
-#define TIMER1_COMPARE_VALUE 15  // (0.9  us/(0.0625 us/tick)) == ~ 14.4 ticks)
-#define TIMER2_COMPARE_VALUE 20 // (1.25 us/(0.0625 us/tick)) ==   20 ticks  )
+#define TIMER0_COMPARE_VALUE 500  // (0.35 us/(0.0625 us/tick)) == ~ 5.6  ticks)
+#define TIMER1_COMPARE_VALUE 1500  // (0.9  us/(0.0625 us/tick)) == ~ 14.4 ticks)
+#define TIMER2_COMPARE_VALUE 2000 // (1.25 us/(0.0625 us/tick)) ==   20 ticks  )
 
 /**
  * Frequency     - 16 MHz

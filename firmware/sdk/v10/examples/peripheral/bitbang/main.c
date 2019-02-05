@@ -29,7 +29,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "nrf_delay.h"
-#include "nrf_gpiote.h"
 #include "nrf_gpio.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_ppi.h"
@@ -37,6 +36,7 @@
 #include "app_error.h"
 #include "boards.h"
 #include "nordic_common.h"
+#include "led_driver.h"
 
 #define TIMER0_COMPARE_VALUE 5  // (0.35 us/(0.0625 us/tick)) == ~ 5.6  ticks)
 #define TIMER1_COMPARE_VALUE 15  // (0.9  us/(0.0625 us/tick)) == ~ 14.4 ticks)
@@ -49,7 +49,7 @@
  * Callback args - None
  */
 nrf_drv_timer_config_t       timer_config = {NRF_TIMER_FREQ_16MHz, NRF_TIMER_MODE_TIMER, NRF_TIMER_BIT_WIDTH_32, 1, NULL};
-nrf_drv_gpiote_out_config_t  gpio_config  = {NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_LOW, true};
+nrf_drv_gpiote_out_config_t  gpio_config  = {NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_LOW, false};
 
 const nrf_drv_timer_t timer0 = NRF_DRV_TIMER_INSTANCE(0);
 const nrf_drv_timer_t timer1 = NRF_DRV_TIMER_INSTANCE(1);
@@ -59,37 +59,9 @@ const nrf_drv_timer_t timer2 = NRF_DRV_TIMER_INSTANCE(2);
 
 nrf_ppi_channel_t ppi_channel0, ppi_channel1, ppi_channel2, ppi_channel3, ppi_channel4, ppi_channel5, ppi_channel6;
 
-static uint8_t toggle = 0;
+//static uint8_t toggle = 0;
 
 void start_shit()
-{
-    // Turn GPIO on
-    nrf_drv_gpiote_out_task_force(GPIO_OUTPUT_PIN_NUMBER, 1);
-
-    // Enable timer 1 hook first
-    nrf_drv_ppi_channel_enable(ppi_channel1);
-
-    // Reset all timers and turn them on
-    nrf_drv_timer_enable(&timer0);
-    nrf_drv_timer_enable(&timer1);
-    nrf_drv_timer_enable(&timer2);
-}
-
-static void init_gpio()
-{
-    nrf_drv_gpiote_init();
-    nrf_drv_gpiote_out_init(GPIO_OUTPUT_PIN_NUMBER, &gpio_config);
-    nrf_drv_gpiote_out_task_enable(GPIO_OUTPUT_PIN_NUMBER);
-}
-
-static void init_timer()
-{
-}
-
-/** @brief Function for initializing the PPI peripheral.
-*/
-
-static void init_ppi(void)
 {
 }
 
@@ -98,18 +70,13 @@ static void init_ppi(void)
  */
 int main(void)
 {
-    init_timer();
-    init_gpio();
-    init_ppi();
-
-    start_shit();
-
+	initialize_driver();
     // Loop and increment the timer count value and capture value into LEDs. @note counter is only incremented between TASK_START and TASK_STOP.
     while (true)
     {
-        
+        test_initialize_driver();
+        run_led_state_optimized();
+        nrf_delay_ms(1000);
     }
 }
-
-
 /** @} */
