@@ -76,7 +76,7 @@ int main(void)
     {
         test_initialize_driver();
         run_led_state_optimized();
-        nrf_delay_ms(1000);
+        nrf_delay_ms(5000);
     }
 }
 /** @} */
