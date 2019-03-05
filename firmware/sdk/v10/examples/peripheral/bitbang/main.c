@@ -70,12 +70,15 @@ void start_shit()
  */
 int main(void)
 {
-	initialize_driver();
+    led_driver_initialize(NULL);
+	//initialize_driver();
     // Loop and increment the timer count value and capture value into LEDs. @note counter is only incremented between TASK_START and TASK_STOP.
     while (true)
     {
-        test_initialize_driver();
-        run_led_state_optimized();
+        gpio_bitmatrix_t mtx;
+        led_driver_initialize(&mtx);
+        test_fs_config();
+        led_driver_print_column(0);
         nrf_delay_ms(5000);
     }
 }
