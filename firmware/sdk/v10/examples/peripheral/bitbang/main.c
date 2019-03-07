@@ -75,10 +75,10 @@ int main(void)
     // Loop and increment the timer count value and capture value into LEDs. @note counter is only incremented between TASK_START and TASK_STOP.
     while (true)
     {
-        gpio_bitmatrix_t mtx;
-        led_driver_initialize(&mtx);
-        test_fs_config();
-        led_driver_print_column(0);
+        gpio_bitstream_t bitstream = {0};
+
+        led_driver_initialize();
+        led_driver_print_bitstream(bitstream);
         nrf_delay_ms(5000);
     }
 }

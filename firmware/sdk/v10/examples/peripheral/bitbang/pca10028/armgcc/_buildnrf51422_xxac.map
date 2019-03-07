@@ -18,6 +18,14 @@ Archive member included to satisfy reference by file (symbol)
                               /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o) (__call_exitprocs)
 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
                               /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o) (_exit)
+/usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+                              _build/pstorage.o (__aeabi_uidiv)
+/usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+                              _build/pstorage.o (__aeabi_idiv)
+/usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+                              /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                              _build/pstorage.o (memcpy)
 
 Allocating common symbols
 Common symbol       size              file
@@ -64,17 +72,40 @@ Discarded input sections
                 0x0000000000000000       0x10 _build/system_nrf51.o
  .data.SystemCoreClock
                 0x0000000000000000        0x4 _build/system_nrf51.o
+ .text          0x0000000000000000        0x0 _build/led_driver.o
+ .data          0x0000000000000000        0x0 _build/led_driver.o
+ .bss           0x0000000000000000        0x0 _build/led_driver.o
  .text          0x0000000000000000        0x0 _build/main.o
  .data          0x0000000000000000        0x0 _build/main.o
  .bss           0x0000000000000000        0x0 _build/main.o
+ .text.start_shit
+                0x0000000000000000        0x4 _build/main.o
+ .data.gpio_config
+                0x0000000000000000        0x3 _build/main.o
  .data.timer_config
                 0x0000000000000000        0x8 _build/main.o
+ .rodata.timer0
+                0x0000000000000000        0x8 _build/main.o
+ .rodata.timer1
+                0x0000000000000000        0x8 _build/main.o
+ .rodata.timer2
+                0x0000000000000000        0x8 _build/main.o
+ COMMON         0x0000000000000000        0x7 _build/main.o
  .text          0x0000000000000000        0x0 _build/app_error.o
  .data          0x0000000000000000        0x0 _build/app_error.o
  .bss           0x0000000000000000        0x0 _build/app_error.o
  .text.app_error_handler
                 0x0000000000000000       0x18 _build/app_error.o
+ .debug_info    0x0000000000000000      0x1e0 _build/app_error.o
+ .debug_abbrev  0x0000000000000000      0x10e _build/app_error.o
+ .debug_loc     0x0000000000000000       0x21 _build/app_error.o
+ .debug_aranges
+                0x0000000000000000       0x20 _build/app_error.o
+ .debug_ranges  0x0000000000000000       0x10 _build/app_error.o
+ .debug_line    0x0000000000000000      0x149 _build/app_error.o
+ .debug_str     0x0000000000000000      0x284 _build/app_error.o
  .comment       0x0000000000000000       0x32 _build/app_error.o
+ .debug_frame   0x0000000000000000       0x20 _build/app_error.o
  .ARM.attributes
                 0x0000000000000000       0x31 _build/app_error.o
  .text          0x0000000000000000        0x0 _build/app_fifo.o
@@ -92,7 +123,16 @@ Discarded input sections
                 0x0000000000000000       0x50 _build/app_fifo.o
  .text.app_fifo_write
                 0x0000000000000000       0x54 _build/app_fifo.o
+ .debug_info    0x0000000000000000      0xcbf _build/app_fifo.o
+ .debug_abbrev  0x0000000000000000      0x28a _build/app_fifo.o
+ .debug_loc     0x0000000000000000      0x410 _build/app_fifo.o
+ .debug_aranges
+                0x0000000000000000       0x48 _build/app_fifo.o
+ .debug_ranges  0x0000000000000000       0xb8 _build/app_fifo.o
+ .debug_line    0x0000000000000000      0x263 _build/app_fifo.o
+ .debug_str     0x0000000000000000      0x710 _build/app_fifo.o
  .comment       0x0000000000000000       0x32 _build/app_fifo.o
+ .debug_frame   0x0000000000000000       0xa4 _build/app_fifo.o
  .ARM.attributes
                 0x0000000000000000       0x31 _build/app_fifo.o
  .text          0x0000000000000000        0x0 _build/app_util_platform.o
@@ -104,12 +144,26 @@ Discarded input sections
                 0x0000000000000000       0x14 _build/app_util_platform.o
  .bss.m_in_critical_region
                 0x0000000000000000        0x4 _build/app_util_platform.o
+ .debug_info    0x0000000000000000      0x101 _build/app_util_platform.o
+ .debug_abbrev  0x0000000000000000       0x8f _build/app_util_platform.o
+ .debug_aranges
+                0x0000000000000000       0x28 _build/app_util_platform.o
+ .debug_ranges  0x0000000000000000       0x18 _build/app_util_platform.o
+ .debug_line    0x0000000000000000      0x15c _build/app_util_platform.o
+ .debug_str     0x0000000000000000      0x258 _build/app_util_platform.o
  .comment       0x0000000000000000       0x32 _build/app_util_platform.o
+ .debug_frame   0x0000000000000000       0x30 _build/app_util_platform.o
  .ARM.attributes
                 0x0000000000000000       0x31 _build/app_util_platform.o
  .text          0x0000000000000000        0x0 _build/nrf_assert.o
  .data          0x0000000000000000        0x0 _build/nrf_assert.o
  .bss           0x0000000000000000        0x0 _build/nrf_assert.o
+ .debug_info    0x0000000000000000       0x64 _build/nrf_assert.o
+ .debug_abbrev  0x0000000000000000       0x26 _build/nrf_assert.o
+ .debug_aranges
+                0x0000000000000000       0x18 _build/nrf_assert.o
+ .debug_line    0x0000000000000000       0x1d _build/nrf_assert.o
+ .debug_str     0x0000000000000000      0x1c9 _build/nrf_assert.o
  .comment       0x0000000000000000       0x32 _build/nrf_assert.o
  .ARM.attributes
                 0x0000000000000000       0x31 _build/nrf_assert.o
@@ -118,7 +172,16 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 _build/retarget.o
  .text._write   0x0000000000000000       0x1c _build/retarget.o
  .text._read    0x0000000000000000       0x14 _build/retarget.o
+ .debug_info    0x0000000000000000      0x9bf _build/retarget.o
+ .debug_abbrev  0x0000000000000000      0x21c _build/retarget.o
+ .debug_loc     0x0000000000000000      0x11a _build/retarget.o
+ .debug_aranges
+                0x0000000000000000       0x28 _build/retarget.o
+ .debug_ranges  0x0000000000000000       0x18 _build/retarget.o
+ .debug_line    0x0000000000000000      0x194 _build/retarget.o
+ .debug_str     0x0000000000000000      0x62c _build/retarget.o
  .comment       0x0000000000000000       0x32 _build/retarget.o
+ .debug_frame   0x0000000000000000       0x44 _build/retarget.o
  .ARM.attributes
                 0x0000000000000000       0x31 _build/retarget.o
  COMMON         0x0000000000000000       0xd0 _build/retarget.o
@@ -149,20 +212,38 @@ Discarded input sections
  .bss.tx_buffer
                 0x0000000000000000        0x1 _build/app_uart_fifo.o
  .bss.tx_tmp    0x0000000000000000        0x1 _build/app_uart_fifo.o
+ .debug_info    0x0000000000000000     0x1277 _build/app_uart_fifo.o
+ .debug_abbrev  0x0000000000000000      0x31e _build/app_uart_fifo.o
+ .debug_loc     0x0000000000000000      0x3ca _build/app_uart_fifo.o
+ .debug_aranges
+                0x0000000000000000       0x48 _build/app_uart_fifo.o
+ .debug_ranges  0x0000000000000000       0x70 _build/app_uart_fifo.o
+ .debug_line    0x0000000000000000      0x33b _build/app_uart_fifo.o
+ .debug_str     0x0000000000000000      0xd88 _build/app_uart_fifo.o
  .comment       0x0000000000000000       0x32 _build/app_uart_fifo.o
+ .debug_frame   0x0000000000000000       0xb0 _build/app_uart_fifo.o
  .ARM.attributes
                 0x0000000000000000       0x31 _build/app_uart_fifo.o
  .text          0x0000000000000000        0x0 _build/nrf_delay.o
  .data          0x0000000000000000        0x0 _build/nrf_delay.o
  .bss           0x0000000000000000        0x0 _build/nrf_delay.o
- .text.nrf_delay_ms
-                0x0000000000000000       0x3c _build/nrf_delay.o
- .comment       0x0000000000000000       0x32 _build/nrf_delay.o
- .ARM.attributes
-                0x0000000000000000       0x31 _build/nrf_delay.o
  .text          0x0000000000000000        0x0 _build/nrf_drv_common.o
  .data          0x0000000000000000        0x0 _build/nrf_drv_common.o
  .bss           0x0000000000000000        0x0 _build/nrf_drv_common.o
+ .text.nrf_drv_common_irq_enable
+                0x0000000000000000       0x7c _build/nrf_drv_common.o
+ .debug_info    0x0000000000000000      0x3f2 _build/nrf_drv_common.o
+ .debug_abbrev  0x0000000000000000      0x183 _build/nrf_drv_common.o
+ .debug_loc     0x0000000000000000       0xa2 _build/nrf_drv_common.o
+ .debug_aranges
+                0x0000000000000000       0x20 _build/nrf_drv_common.o
+ .debug_ranges  0x0000000000000000       0x28 _build/nrf_drv_common.o
+ .debug_line    0x0000000000000000      0x184 _build/nrf_drv_common.o
+ .debug_str     0x0000000000000000      0x46b _build/nrf_drv_common.o
+ .comment       0x0000000000000000       0x32 _build/nrf_drv_common.o
+ .debug_frame   0x0000000000000000       0x30 _build/nrf_drv_common.o
+ .ARM.attributes
+                0x0000000000000000       0x31 _build/nrf_drv_common.o
  .text          0x0000000000000000        0x0 _build/nrf_drv_ppi.o
  .data          0x0000000000000000        0x0 _build/nrf_drv_ppi.o
  .bss           0x0000000000000000        0x0 _build/nrf_drv_ppi.o
@@ -176,6 +257,8 @@ Discarded input sections
                 0x0000000000000000       0x34 _build/nrf_drv_ppi.o
  .text.nrf_drv_ppi_channel_assign
                 0x0000000000000000       0x48 _build/nrf_drv_ppi.o
+ .text.nrf_drv_ppi_channel_enable
+                0x0000000000000000       0x34 _build/nrf_drv_ppi.o
  .text.nrf_drv_ppi_channel_disable
                 0x0000000000000000       0x34 _build/nrf_drv_ppi.o
  .text.nrf_drv_ppi_group_alloc
@@ -190,17 +273,35 @@ Discarded input sections
                 0x0000000000000000       0x4c _build/nrf_drv_ppi.o
  .text.nrf_drv_ppi_channels_include_in_group
                 0x0000000000000000       0x4c _build/nrf_drv_ppi.o
+ .bss.m_channels_allocated
+                0x0000000000000000        0x4 _build/nrf_drv_ppi.o
  .bss.m_drv_state
                 0x0000000000000000        0x1 _build/nrf_drv_ppi.o
  .bss.m_groups_allocated
                 0x0000000000000000        0x1 _build/nrf_drv_ppi.o
+ .debug_info    0x0000000000000000     0x16c9 _build/nrf_drv_ppi.o
+ .debug_abbrev  0x0000000000000000      0x3a7 _build/nrf_drv_ppi.o
+ .debug_loc     0x0000000000000000      0x5a6 _build/nrf_drv_ppi.o
+ .debug_aranges
+                0x0000000000000000       0x80 _build/nrf_drv_ppi.o
+ .debug_ranges  0x0000000000000000      0x2a8 _build/nrf_drv_ppi.o
+ .debug_line    0x0000000000000000      0x5c9 _build/nrf_drv_ppi.o
+ .debug_str     0x0000000000000000      0xd4e _build/nrf_drv_ppi.o
+ .comment       0x0000000000000000       0x32 _build/nrf_drv_ppi.o
+ .debug_frame   0x0000000000000000      0x15c _build/nrf_drv_ppi.o
+ .ARM.attributes
+                0x0000000000000000       0x31 _build/nrf_drv_ppi.o
  .text          0x0000000000000000        0x0 _build/nrf_drv_gpiote.o
  .data          0x0000000000000000        0x0 _build/nrf_drv_gpiote.o
  .bss           0x0000000000000000        0x0 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_init
+                0x0000000000000000       0x54 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_is_init
                 0x0000000000000000       0x14 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_uninit
                 0x0000000000000000       0xf0 _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_out_init
+                0x0000000000000000       0xcc _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_out_uninit
                 0x0000000000000000       0x44 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_out_set
@@ -209,10 +310,14 @@ Discarded input sections
                 0x0000000000000000       0x14 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_out_toggle
                 0x0000000000000000       0x2c _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_out_task_enable
+                0x0000000000000000       0x38 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_out_task_disable
                 0x0000000000000000       0x28 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_out_task_addr_get
                 0x0000000000000000       0x1c _build/nrf_drv_gpiote.o
+ .text.nrf_drv_gpiote_out_task_force
+                0x0000000000000000       0x34 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_out_task_trigger
                 0x0000000000000000       0x20 _build/nrf_drv_gpiote.o
  .text.nrf_drv_gpiote_in_init
@@ -234,6 +339,8 @@ Discarded input sections
                 0x0000000000000000       0x98 _build/nrf_drv_timer.o
  .text.nrf_drv_timer_uninit
                 0x0000000000000000       0x70 _build/nrf_drv_timer.o
+ .text.nrf_drv_timer_enable
+                0x0000000000000000       0x14 _build/nrf_drv_timer.o
  .text.nrf_drv_timer_disable
                 0x0000000000000000       0x14 _build/nrf_drv_timer.o
  .text.nrf_drv_timer_resume
@@ -268,6 +375,7 @@ Discarded input sections
                 0x0000000000000000       0x24 _build/nrf_drv_timer.o
  .text.nrf_drv_timer_compare_int_disable
                 0x0000000000000000       0x10 _build/nrf_drv_timer.o
+ .bss.m_cb      0x0000000000000000        0x3 _build/nrf_drv_timer.o
  .rodata.m_default_config
                 0x0000000000000000       0x18 _build/nrf_drv_timer.o
  .text          0x0000000000000000        0x0 _build/nrf_drv_uart.o
@@ -293,9 +401,148 @@ Discarded input sections
                 0x0000000000000000       0x1c _build/nrf_drv_uart.o
  .rodata.m_default_config
                 0x0000000000000000       0x20 _build/nrf_drv_uart.o
+ .text          0x0000000000000000        0x0 _build/pstorage.o
+ .data          0x0000000000000000        0x0 _build/pstorage.o
+ .bss           0x0000000000000000        0x0 _build/pstorage.o
+ .text.sd_flash_write
+                0x0000000000000000        0x4 _build/pstorage.o
+ .text.sd_flash_page_erase
+                0x0000000000000000        0x4 _build/pstorage.o
+ .text.state_entry_action_run
+                0x0000000000000000      0x1a0 _build/pstorage.o
+ .text.clear_operation_execute
+                0x0000000000000000      0x19c _build/pstorage.o
+ .text.tail_restore_state_run
+                0x0000000000000000       0xb4 _build/pstorage.o
+ .text.state_restore_head_entry_run
+                0x0000000000000000       0xb4 _build/pstorage.o
+ .text.state_write_data_swap_entry_run
+                0x0000000000000000       0xb4 _build/pstorage.o
+ .text.state_restore_tail_entry_run
+                0x0000000000000000       0xc4 _build/pstorage.o
+ .text.data_to_swap_write_state_run
+                0x0000000000000000       0xa4 _build/pstorage.o
+ .text.state_swap_erase_entry_run
+                0x0000000000000000       0xa8 _build/pstorage.o
+ .text.swap_erase_state_run
+                0x0000000000000000       0xd8 _build/pstorage.o
+ .text.head_restore_state_run
+                0x0000000000000000      0x1c8 _build/pstorage.o
+ .text.store_cmd_flash_write_execute
+                0x0000000000000000      0x134 _build/pstorage.o
+ .text.data_page_erase_state_run
+                0x0000000000000000      0x214 _build/pstorage.o
+ .text.state_erase_data_page_entry_run
+                0x0000000000000000       0x70 _build/pstorage.o
+ .text.unlikely.cmd_queue_enqueue
+                0x0000000000000000       0x94 _build/pstorage.o
+ .text.pstorage_sys_event_handler
+                0x0000000000000000      0x200 _build/pstorage.o
+ .text.pstorage_init
+                0x0000000000000000      0x150 _build/pstorage.o
+ .text.pstorage_register
+                0x0000000000000000       0xec _build/pstorage.o
+ .text.pstorage_block_identifier_get
+                0x0000000000000000       0x50 _build/pstorage.o
+ .text.pstorage_store
+                0x0000000000000000       0x7c _build/pstorage.o
+ .text.pstorage_update
+                0x0000000000000000       0x7c _build/pstorage.o
+ .text.pstorage_load
+                0x0000000000000000       0xac _build/pstorage.o
+ .text.pstorage_clear
+                0x0000000000000000       0x9c _build/pstorage.o
+ .text.pstorage_access_status_get
+                0x0000000000000000       0x28 _build/pstorage.o
+ .bss.m_app_data_size
+                0x0000000000000000        0x4 _build/pstorage.o
+ .bss.m_app_table
+                0x0000000000000000        0xc _build/pstorage.o
+ .bss.m_cmd_queue
+                0x0000000000000000       0xcc _build/pstorage.o
+ .bss.m_current_page_id
+                0x0000000000000000        0x4 _build/pstorage.o
+ .bss.m_flags   0x0000000000000000        0x4 _build/pstorage.o
+ .bss.m_head_word_size
+                0x0000000000000000        0x4 _build/pstorage.o
+ .bss.m_next_app_instance
+                0x0000000000000000        0x2 _build/pstorage.o
+ .bss.m_next_page_addr
+                0x0000000000000000        0x4 _build/pstorage.o
+ .bss.m_num_of_bytes_written
+                0x0000000000000000        0x4 _build/pstorage.o
+ .bss.m_num_of_command_retries
+                0x0000000000000000        0x4 _build/pstorage.o
+ .bss.m_state   0x0000000000000000        0x1 _build/pstorage.o
+ .bss.m_swap_sub_state
+                0x0000000000000000        0x1 _build/pstorage.o
+ .bss.m_tail_word_size
+                0x0000000000000000        0x4 _build/pstorage.o
+ .rodata.swap_sub_state_sm_lut.5948
+                0x0000000000000000       0x14 _build/pstorage.o
+ .rodata.swap_sub_state_sm_lut.6023
+                0x0000000000000000       0x14 _build/pstorage.o
+ .debug_info    0x0000000000000000     0x3ada _build/pstorage.o
+ .debug_abbrev  0x0000000000000000      0x4e2 _build/pstorage.o
+ .debug_loc     0x0000000000000000     0x2ae5 _build/pstorage.o
+ .debug_aranges
+                0x0000000000000000       0xe0 _build/pstorage.o
+ .debug_ranges  0x0000000000000000      0x940 _build/pstorage.o
+ .debug_line    0x0000000000000000      0xdb2 _build/pstorage.o
+ .debug_str     0x0000000000000000     0x17ad _build/pstorage.o
+ .comment       0x0000000000000000       0x32 _build/pstorage.o
+ .debug_frame   0x0000000000000000      0x33c _build/pstorage.o
+ .ARM.attributes
+                0x0000000000000000       0x31 _build/pstorage.o
  .data          0x0000000000000000        0x0 _build/gcc_startup_nrf51.o
  .bss           0x0000000000000000        0x0 _build/gcc_startup_nrf51.o
  .ARM.extab     0x0000000000000000        0x0 _build/gcc_startup_nrf51.o
+ .text          0x0000000000000000      0x114 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .data          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .bss           0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_line    0x0000000000000000       0x6d /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_info    0x0000000000000000       0xbf /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x0000000000000000       0x14 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x0000000000000000       0x1e /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_udivsi3.o)
+ .text          0x0000000000000000      0x1d4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .data          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .bss           0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_frame   0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_line    0x0000000000000000       0x74 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_info    0x0000000000000000       0xbf /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_abbrev  0x0000000000000000       0x14 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .debug_aranges
+                0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x0000000000000000       0x1e /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_divsi3.o)
+ .text          0x0000000000000000        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .data          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .bss           0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x0000000000000000       0x61 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0000000000000000       0xbf /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x0000000000000000       0x14 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x0000000000000000       0x1e /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a(_dvmd_tls.o)
+ .text          0x0000000000000000       0x88 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .data          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_info    0x0000000000000000      0xe36 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_abbrev  0x0000000000000000      0x1b4 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_loc     0x0000000000000000      0x33b /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_aranges
+                0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_line    0x0000000000000000      0x1b9 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_str     0x0000000000000000      0x918 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .comment       0x0000000000000000       0x58 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000000       0x30 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x0000000000000000       0x2c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memcpy-stub.o)
  .text          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtend.o
  .data          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtend.o
  .bss           0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtend.o
@@ -320,6 +567,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0
 LOAD /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a
 LOAD /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a
 LOAD _build/system_nrf51.o
+LOAD _build/led_driver.o
 LOAD _build/main.o
 LOAD _build/app_error.o
 LOAD _build/app_fifo.o
@@ -333,6 +581,7 @@ LOAD _build/nrf_drv_ppi.o
 LOAD _build/nrf_drv_gpiote.o
 LOAD _build/nrf_drv_timer.o
 LOAD _build/nrf_drv_uart.o
+LOAD _build/pstorage.o
 LOAD _build/gcc_startup_nrf51.o
 START GROUP
 LOAD /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/libgcc.a
@@ -355,7 +604,7 @@ END GROUP
  *(fs_data)
                 [!provide]                        PROVIDE (__stop_fs_data, .)
 
-.text           0x0000000000000000      0xe44
+.text           0x0000000000000000      0xc88
  *(.Vectors)
  .Vectors       0x0000000000000000       0xc0 _build/gcc_startup_nrf51.o
                 0x0000000000000000                __Vectors
@@ -383,84 +632,69 @@ END GROUP
  .text.SystemInit
                 0x00000000000004e8       0x94 _build/system_nrf51.o
                 0x00000000000004e8                SystemInit
- .text.start_shit
-                0x000000000000057c       0x38 _build/main.o
-                0x000000000000057c                start_shit
+ .text.led_driver_initialize
+                0x000000000000057c       0x30 _build/led_driver.o
+                0x000000000000057c                led_driver_initialize
+ .text.led_driver_print_bitstream
+                0x00000000000005ac       0x64 _build/led_driver.o
+                0x00000000000005ac                led_driver_print_bitstream
  .text.startup.main
-                0x00000000000005b4       0x20 _build/main.o
-                0x00000000000005b4                main
- .text.nrf_drv_common_irq_enable
-                0x00000000000005d4       0x7c _build/nrf_drv_common.o
-                0x00000000000005d4                nrf_drv_common_irq_enable
- .text.nrf_drv_ppi_channel_enable
-                0x0000000000000650       0x34 _build/nrf_drv_ppi.o
-                0x0000000000000650                nrf_drv_ppi_channel_enable
- .text.nrf_drv_gpiote_init
-                0x0000000000000684       0x54 _build/nrf_drv_gpiote.o
-                0x0000000000000684                nrf_drv_gpiote_init
- .text.nrf_drv_gpiote_out_init
-                0x00000000000006d8       0xcc _build/nrf_drv_gpiote.o
-                0x00000000000006d8                nrf_drv_gpiote_out_init
- .text.nrf_drv_gpiote_out_task_enable
-                0x00000000000007a4       0x38 _build/nrf_drv_gpiote.o
-                0x00000000000007a4                nrf_drv_gpiote_out_task_enable
- .text.nrf_drv_gpiote_out_task_force
-                0x00000000000007dc       0x34 _build/nrf_drv_gpiote.o
-                0x00000000000007dc                nrf_drv_gpiote_out_task_force
+                0x0000000000000610       0x34 _build/main.o
+                0x0000000000000610                main
+ .text.nrf_delay_ms
+                0x0000000000000644       0x3c _build/nrf_delay.o
+                0x0000000000000644                nrf_delay_ms
  .text.GPIOTE_IRQHandler
-                0x0000000000000810      0x1ec _build/nrf_drv_gpiote.o
-                0x0000000000000810                GPIOTE_IRQHandler
- .text.nrf_drv_timer_enable
-                0x00000000000009fc       0x14 _build/nrf_drv_timer.o
-                0x00000000000009fc                nrf_drv_timer_enable
+                0x0000000000000680      0x1ec _build/nrf_drv_gpiote.o
+                0x0000000000000680                GPIOTE_IRQHandler
  .text.TIMER0_IRQHandler
-                0x0000000000000a10       0xc0 _build/nrf_drv_timer.o
-                0x0000000000000a10                TIMER0_IRQHandler
+                0x000000000000086c       0xc0 _build/nrf_drv_timer.o
+                0x000000000000086c                TIMER0_IRQHandler
  .text.TIMER1_IRQHandler
-                0x0000000000000ad0       0xc0 _build/nrf_drv_timer.o
-                0x0000000000000ad0                TIMER1_IRQHandler
+                0x000000000000092c       0xc0 _build/nrf_drv_timer.o
+                0x000000000000092c                TIMER1_IRQHandler
  .text.TIMER2_IRQHandler
-                0x0000000000000b90       0xc0 _build/nrf_drv_timer.o
-                0x0000000000000b90                TIMER2_IRQHandler
+                0x00000000000009ec       0xc0 _build/nrf_drv_timer.o
+                0x00000000000009ec                TIMER2_IRQHandler
  .text.UART0_IRQHandler
-                0x0000000000000c50      0x16c _build/nrf_drv_uart.o
-                0x0000000000000c50                UART0_IRQHandler
- .text          0x0000000000000dbc       0x54 _build/gcc_startup_nrf51.o
-                0x0000000000000dbc                Reset_Handler
-                0x0000000000000e04                NMI_Handler
-                0x0000000000000e06                HardFault_Handler
-                0x0000000000000e08                SVC_Handler
-                0x0000000000000e0a                PendSV_Handler
-                0x0000000000000e0c                SysTick_Handler
-                0x0000000000000e0e                SPI0_TWI0_IRQHandler
-                0x0000000000000e0e                RTC0_IRQHandler
-                0x0000000000000e0e                POWER_CLOCK_IRQHandler
-                0x0000000000000e0e                RADIO_IRQHandler
-                0x0000000000000e0e                LPCOMP_IRQHandler
-                0x0000000000000e0e                SWI4_IRQHandler
-                0x0000000000000e0e                TEMP_IRQHandler
-                0x0000000000000e0e                QDEC_IRQHandler
-                0x0000000000000e0e                SWI5_IRQHandler
-                0x0000000000000e0e                SWI0_IRQHandler
-                0x0000000000000e0e                ECB_IRQHandler
-                0x0000000000000e0e                Default_Handler
-                0x0000000000000e0e                ADC_IRQHandler
-                0x0000000000000e0e                SWI3_IRQHandler
-                0x0000000000000e0e                CCM_AAR_IRQHandler
-                0x0000000000000e0e                WDT_IRQHandler
-                0x0000000000000e0e                SWI2_IRQHandler
-                0x0000000000000e0e                RNG_IRQHandler
-                0x0000000000000e0e                SPI1_TWI1_IRQHandler
-                0x0000000000000e0e                RTC1_IRQHandler
-                0x0000000000000e0e                SWI1_IRQHandler
+                0x0000000000000aac      0x16c _build/nrf_drv_uart.o
+                0x0000000000000aac                UART0_IRQHandler
+ .text          0x0000000000000c18       0x54 _build/gcc_startup_nrf51.o
+                0x0000000000000c18                Reset_Handler
+                0x0000000000000c60                NMI_Handler
+                0x0000000000000c62                HardFault_Handler
+                0x0000000000000c64                SVC_Handler
+                0x0000000000000c66                PendSV_Handler
+                0x0000000000000c68                SysTick_Handler
+                0x0000000000000c6a                SPI0_TWI0_IRQHandler
+                0x0000000000000c6a                RTC0_IRQHandler
+                0x0000000000000c6a                POWER_CLOCK_IRQHandler
+                0x0000000000000c6a                RADIO_IRQHandler
+                0x0000000000000c6a                LPCOMP_IRQHandler
+                0x0000000000000c6a                SWI4_IRQHandler
+                0x0000000000000c6a                TEMP_IRQHandler
+                0x0000000000000c6a                QDEC_IRQHandler
+                0x0000000000000c6a                SWI5_IRQHandler
+                0x0000000000000c6a                SWI0_IRQHandler
+                0x0000000000000c6a                ECB_IRQHandler
+                0x0000000000000c6a                Default_Handler
+                0x0000000000000c6a                ADC_IRQHandler
+                0x0000000000000c6a                SWI3_IRQHandler
+                0x0000000000000c6a                CCM_AAR_IRQHandler
+                0x0000000000000c6a                WDT_IRQHandler
+                0x0000000000000c6a                SWI2_IRQHandler
+                0x0000000000000c6a                RNG_IRQHandler
+                0x0000000000000c6a                SPI1_TWI1_IRQHandler
+                0x0000000000000c6a                RTC1_IRQHandler
+                0x0000000000000c6a                SWI1_IRQHandler
  *(.init)
- .init          0x0000000000000e10        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
-                0x0000000000000e10                _init
- .init          0x0000000000000e14        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
+ .init          0x0000000000000c6c        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
+                0x0000000000000c6c                _init
+ .init          0x0000000000000c70        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
  *(.fini)
- .fini          0x0000000000000e1c        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
-                0x0000000000000e1c                _fini
- .fini          0x0000000000000e20        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
+ .fini          0x0000000000000c78        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
+                0x0000000000000c78                _fini
+ .fini          0x0000000000000c7c        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -472,64 +706,54 @@ END GROUP
  *(SORT(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x0000000000000e28        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-impure.o)
-                0x0000000000000e28                _global_impure_ptr
- .rodata.timer0
-                0x0000000000000e2c        0x8 _build/main.o
-                0x0000000000000e2c                timer0
- .rodata.timer1
-                0x0000000000000e34        0x8 _build/main.o
-                0x0000000000000e34                timer1
- .rodata.timer2
-                0x0000000000000e3c        0x8 _build/main.o
-                0x0000000000000e3c                timer2
+ .rodata        0x0000000000000c84        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-impure.o)
+                0x0000000000000c84                _global_impure_ptr
  *(.eh_frame*)
- .eh_frame      0x0000000000000e44        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
-                0x0000000000000e44                . = ALIGN (0x4)
+ .eh_frame      0x0000000000000c88        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+                0x0000000000000c88                . = ALIGN (0x4)
 
-.glue_7         0x0000000000000e44        0x0
- .glue_7        0x0000000000000e44        0x0 linker stubs
+.glue_7         0x0000000000000c88        0x0
+ .glue_7        0x0000000000000c88        0x0 linker stubs
 
-.glue_7t        0x0000000000000e44        0x0
- .glue_7t       0x0000000000000e44        0x0 linker stubs
+.glue_7t        0x0000000000000c88        0x0
+ .glue_7t       0x0000000000000c88        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000e44        0x0
- .vfp11_veneer  0x0000000000000e44        0x0 linker stubs
+.vfp11_veneer   0x0000000000000c88        0x0
+ .vfp11_veneer  0x0000000000000c88        0x0 linker stubs
 
-.v4_bx          0x0000000000000e44        0x0
- .v4_bx         0x0000000000000e44        0x0 linker stubs
+.v4_bx          0x0000000000000c88        0x0
+ .v4_bx         0x0000000000000c88        0x0 linker stubs
 
-.iplt           0x0000000000000e44        0x0
- .iplt          0x0000000000000e44        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.iplt           0x0000000000000c88        0x0
+ .iplt          0x0000000000000c88        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.ARM.extab      0x0000000000000e44        0x0
+.ARM.extab      0x0000000000000c88        0x0
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000000e44                . = ALIGN (0x4)
-                0x0000000000000e44                __exidx_start = .
+                0x0000000000000c88                . = ALIGN (0x4)
+                0x0000000000000c88                __exidx_start = .
 
-.ARM.exidx      0x0000000000000e44        0x8
+.ARM.exidx      0x0000000000000c88        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0000000000000e44        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
- .ARM.exidx     0x0000000000000e4c        0x0 _build/gcc_startup_nrf51.o
+ .ARM.exidx     0x0000000000000c88        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
+ .ARM.exidx     0x0000000000000c90        0x0 _build/gcc_startup_nrf51.o
                                           0x8 (size before relaxing)
-                0x0000000000000e4c                . = ALIGN (0x4)
-                0x0000000000000e4c                __exidx_end = .
-                0x0000000000000e4c                __etext = .
+                0x0000000000000c90                . = ALIGN (0x4)
+                0x0000000000000c90                __exidx_end = .
+                0x0000000000000c90                __etext = .
 
-.rel.dyn        0x0000000000000e4c        0x0
- .rel.iplt      0x0000000000000e4c        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.rel.dyn        0x0000000000000c90        0x0
+ .rel.iplt      0x0000000000000c90        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.data           0x0000000020000000       0x70 load address 0x0000000000000e4c
+.data           0x0000000020000000       0x70 load address 0x0000000000000c90
                 0x0000000020000000                __data_start__ = .
  *(vtable)
  *(.data*)
  .data          0x0000000020000000       0x64 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-impure.o)
                 0x0000000020000000                _impure_ptr
- .data.gpio_config
-                0x0000000020000064        0x3 _build/main.o
-                0x0000000020000064                gpio_config
+ .data.num_shift.5412
+                0x0000000020000064        0x1 _build/led_driver.o
                 0x0000000020000068                . = ALIGN (0x4)
- *fill*         0x0000000020000067        0x1 
+ *fill*         0x0000000020000065        0x3 
                 0x0000000020000068                PROVIDE (__preinit_array_start, .)
  *(.preinit_array)
                 0x0000000020000068                PROVIDE (__preinit_array_end, .)
@@ -551,16 +775,16 @@ END GROUP
                 0x0000000020000070                __data_end__ = .
 
 .tm_clone_table
-                0x0000000020000070        0x0 load address 0x0000000000000ebc
+                0x0000000020000070        0x0 load address 0x0000000000000d00
  .tm_clone_table
                 0x0000000020000070        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
  .tm_clone_table
                 0x0000000020000070        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtend.o
 
-.igot.plt       0x0000000020000070        0x0 load address 0x0000000000000ebc
+.igot.plt       0x0000000020000070        0x0 load address 0x0000000000000d00
  .igot.plt      0x0000000020000070        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.bss            0x0000000020000070      0x124 load address 0x0000000000000ebc
+.bss            0x0000000020000070      0x114 load address 0x0000000000000d00
                 0x0000000020000070                . = ALIGN (0x4)
                 0x0000000020000070                __bss_start__ = .
  *(.bss*)
@@ -568,40 +792,27 @@ END GROUP
  .bss           0x000000002000008c       0x8c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
  .bss           0x0000000020000118        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
                 0x0000000020000118                _global_atexit
- .bss.m_channels_allocated
-                0x000000002000011c        0x4 _build/nrf_drv_ppi.o
- .bss.m_cb      0x0000000020000120       0x38 _build/nrf_drv_gpiote.o
- .bss.m_cb      0x0000000020000158        0x3 _build/nrf_drv_timer.o
- *fill*         0x000000002000015b        0x1 
+ .bss.m_cb      0x000000002000011c       0x38 _build/nrf_drv_gpiote.o
  .bss.m_timer_event_handlers
-                0x000000002000015c        0xc _build/nrf_drv_timer.o
+                0x0000000020000154        0xc _build/nrf_drv_timer.o
  .bss.mp_contexts
-                0x0000000020000168        0xc _build/nrf_drv_timer.o
- .bss.m_cb      0x0000000020000174       0x18 _build/nrf_drv_uart.o
+                0x0000000020000160        0xc _build/nrf_drv_timer.o
+ .bss.m_cb      0x000000002000016c       0x18 _build/nrf_drv_uart.o
  *(COMMON)
- COMMON         0x000000002000018c        0x7 _build/main.o
-                0x000000002000018c                ppi_channel3
-                0x000000002000018d                ppi_channel6
-                0x000000002000018e                ppi_channel0
-                0x000000002000018f                ppi_channel1
-                0x0000000020000190                ppi_channel4
-                0x0000000020000191                ppi_channel2
-                0x0000000020000192                ppi_channel5
-                0x0000000020000194                . = ALIGN (0x4)
- *fill*         0x0000000020000193        0x1 
-                0x0000000020000194                __bss_end__ = .
+                0x0000000020000184                . = ALIGN (0x4)
+                0x0000000020000184                __bss_end__ = .
 
-.heap           0x0000000020000198      0x800
-                0x0000000020000198                __end__ = .
-                0x0000000020000198                end = __end__
+.heap           0x0000000020000188      0x800
+                0x0000000020000188                __end__ = .
+                0x0000000020000188                end = __end__
  *(.heap*)
- .heap          0x0000000020000198      0x800 _build/gcc_startup_nrf51.o
-                0x0000000020000198                __HeapBase
-                0x0000000020000998                __HeapLimit = .
+ .heap          0x0000000020000188      0x800 _build/gcc_startup_nrf51.o
+                0x0000000020000188                __HeapBase
+                0x0000000020000988                __HeapLimit = .
 
-.stack_dummy    0x0000000020000198      0x800
+.stack_dummy    0x0000000020000188      0x800
  *(.stack*)
- .stack         0x0000000020000198      0x800 _build/gcc_startup_nrf51.o
+ .stack         0x0000000020000188      0x800 _build/gcc_startup_nrf51.o
                 0x0000000020008000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
                 0x0000000020007800                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
                 0x0000000020008000                PROVIDE (__stack, __StackTop)
@@ -637,11 +848,11 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .ARM.attributes
                 0x00000000000001f1       0x31 _build/system_nrf51.o
  .ARM.attributes
-                0x0000000000000222       0x31 _build/main.o
+                0x0000000000000222       0x31 _build/led_driver.o
  .ARM.attributes
-                0x0000000000000253       0x31 _build/nrf_drv_common.o
+                0x0000000000000253       0x31 _build/main.o
  .ARM.attributes
-                0x0000000000000284       0x31 _build/nrf_drv_ppi.o
+                0x0000000000000284       0x31 _build/nrf_delay.o
  .ARM.attributes
                 0x00000000000002b5       0x31 _build/nrf_drv_gpiote.o
  .ARM.attributes
@@ -669,15 +880,15 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .comment       0x0000000000000088       0x58 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .comment       0x0000000000000088       0x58 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
  .comment       0x0000000000000088       0x32 _build/system_nrf51.o
+ .comment       0x0000000000000088       0x32 _build/led_driver.o
  .comment       0x0000000000000088       0x32 _build/main.o
- .comment       0x0000000000000088       0x32 _build/nrf_drv_common.o
- .comment       0x0000000000000088       0x32 _build/nrf_drv_ppi.o
+ .comment       0x0000000000000088       0x32 _build/nrf_delay.o
  .comment       0x0000000000000088       0x32 _build/nrf_drv_gpiote.o
  .comment       0x0000000000000088       0x32 _build/nrf_drv_timer.o
  .comment       0x0000000000000088       0x32 _build/nrf_drv_uart.o
  .comment       0x0000000000000088       0x32 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtend.o
 
-.debug_line     0x0000000000000000      0x9ee
+.debug_line     0x0000000000000000     0x2bbc
  .debug_line    0x0000000000000000       0x86 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
  .debug_line    0x0000000000000086      0x129 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_line    0x00000000000001af      0x12c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
@@ -688,8 +899,15 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_line    0x00000000000006c1      0x15a /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
  .debug_line    0x000000000000081b      0x178 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_line    0x0000000000000993       0x5b /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
+ .debug_line    0x00000000000009ee      0x120 _build/system_nrf51.o
+ .debug_line    0x0000000000000b0e      0x24a _build/led_driver.o
+ .debug_line    0x0000000000000d58      0x29e _build/main.o
+ .debug_line    0x0000000000000ff6      0x173 _build/nrf_delay.o
+ .debug_line    0x0000000000001169      0x9a3 _build/nrf_drv_gpiote.o
+ .debug_line    0x0000000000001b0c      0x863 _build/nrf_drv_timer.o
+ .debug_line    0x000000000000236f      0x84d _build/nrf_drv_uart.o
 
-.debug_info     0x0000000000000000     0x3ec5
+.debug_info     0x0000000000000000     0xc02b
  .debug_info    0x0000000000000000       0x26 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
  .debug_info    0x0000000000000026      0x907 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_info    0x000000000000092d      0x952 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
@@ -700,8 +918,15 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_info    0x0000000000002b3c      0x991 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
  .debug_info    0x00000000000034cd      0x95e /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_info    0x0000000000003e2b       0x9a /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
+ .debug_info    0x0000000000003ec5      0x1ca _build/system_nrf51.o
+ .debug_info    0x000000000000408f      0xdab _build/led_driver.o
+ .debug_info    0x0000000000004e3a      0xfe9 _build/main.o
+ .debug_info    0x0000000000005e23      0x91a _build/nrf_delay.o
+ .debug_info    0x000000000000673d     0x1eb7 _build/nrf_drv_gpiote.o
+ .debug_info    0x00000000000085f4     0x183d _build/nrf_drv_timer.o
+ .debug_info    0x0000000000009e31     0x21fa _build/nrf_drv_uart.o
 
-.debug_abbrev   0x0000000000000000      0xca4
+.debug_abbrev   0x0000000000000000     0x2104
  .debug_abbrev  0x0000000000000000       0x14 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
  .debug_abbrev  0x0000000000000014      0x1c8 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_abbrev  0x00000000000001dc      0x1cd /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
@@ -712,8 +937,15 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_abbrev  0x0000000000000821      0x225 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
  .debug_abbrev  0x0000000000000a46      0x1fd /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_abbrev  0x0000000000000c43       0x61 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
+ .debug_abbrev  0x0000000000000ca4      0x108 _build/system_nrf51.o
+ .debug_abbrev  0x0000000000000dac      0x306 _build/led_driver.o
+ .debug_abbrev  0x00000000000010b2      0x286 _build/main.o
+ .debug_abbrev  0x0000000000001338      0x210 _build/nrf_delay.o
+ .debug_abbrev  0x0000000000001548      0x476 _build/nrf_drv_gpiote.o
+ .debug_abbrev  0x00000000000019be      0x3aa _build/nrf_drv_timer.o
+ .debug_abbrev  0x0000000000001d68      0x39c _build/nrf_drv_uart.o
 
-.debug_aranges  0x0000000000000000      0x138
+.debug_aranges  0x0000000000000000      0x3c0
  .debug_aranges
                 0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
  .debug_aranges
@@ -734,29 +966,57 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
                 0x00000000000000f8       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_aranges
                 0x0000000000000118       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
+ .debug_aranges
+                0x0000000000000138       0x28 _build/system_nrf51.o
+ .debug_aranges
+                0x0000000000000160       0x28 _build/led_driver.o
+ .debug_aranges
+                0x0000000000000188       0x28 _build/main.o
+ .debug_aranges
+                0x00000000000001b0       0x20 _build/nrf_delay.o
+ .debug_aranges
+                0x00000000000001d0       0xb8 _build/nrf_drv_gpiote.o
+ .debug_aranges
+                0x0000000000000288       0xd0 _build/nrf_drv_timer.o
+ .debug_aranges
+                0x0000000000000358       0x68 _build/nrf_drv_uart.o
 
-.debug_str      0x0000000000000000      0xcf6
+.debug_str      0x0000000000000000     0x36ee
  .debug_str     0x0000000000000000       0x82 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
- .debug_str     0x0000000000000082      0x577 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
+ .debug_str     0x0000000000000082      0x563 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
                                         0x611 (size before relaxing)
- .debug_str     0x00000000000005f9       0x71 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
+ .debug_str     0x00000000000005e5       0x6c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
                                         0x612 (size before relaxing)
- .debug_str     0x000000000000066a       0xbb /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-fini.o)
+ .debug_str     0x0000000000000651       0xbb /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-fini.o)
                                         0x1e3 (size before relaxing)
- .debug_str     0x0000000000000725       0x88 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-impure.o)
+ .debug_str     0x000000000000070c       0x88 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-impure.o)
                                         0x5c6 (size before relaxing)
- .debug_str     0x00000000000007ad       0x93 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-init.o)
+ .debug_str     0x0000000000000794       0x8d /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-init.o)
                                         0x20d (size before relaxing)
- .debug_str     0x0000000000000840      0x304 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
+ .debug_str     0x0000000000000821      0x2fd /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
                                         0x8f3 (size before relaxing)
- .debug_str     0x0000000000000b44       0x86 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
+ .debug_str     0x0000000000000b1e       0x7a /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
                                         0x664 (size before relaxing)
- .debug_str     0x0000000000000bca       0x46 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_str     0x0000000000000b98       0x46 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
                                         0x60f (size before relaxing)
- .debug_str     0x0000000000000c10       0xe6 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
+ .debug_str     0x0000000000000bde       0xe6 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
                                         0x17c (size before relaxing)
+ .debug_str     0x0000000000000cc4      0x22c _build/system_nrf51.o
+                                        0x2b9 (size before relaxing)
+ .debug_str     0x0000000000000ef0      0x320 _build/led_driver.o
+                                        0x8d4 (size before relaxing)
+ .debug_str     0x0000000000001210      0x7df _build/main.o
+                                        0xe2d (size before relaxing)
+ .debug_str     0x00000000000019ef       0x65 _build/nrf_delay.o
+                                        0x616 (size before relaxing)
+ .debug_str     0x0000000000001a54      0x984 _build/nrf_drv_gpiote.o
+                                       0x10c0 (size before relaxing)
+ .debug_str     0x00000000000023d8      0x94e _build/nrf_drv_timer.o
+                                       0x10ae (size before relaxing)
+ .debug_str     0x0000000000002d26      0x9c8 _build/nrf_drv_uart.o
+                                       0x121a (size before relaxing)
 
-.debug_loc      0x0000000000000000      0x606
+.debug_loc      0x0000000000000000     0x3ed2
  .debug_loc     0x0000000000000000       0x2c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_loc     0x000000000000002c       0x1e /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
  .debug_loc     0x000000000000004a       0x3e /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-fini.o)
@@ -764,8 +1024,13 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_loc     0x000000000000010c      0x1a5 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
  .debug_loc     0x00000000000002b1      0x192 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
  .debug_loc     0x0000000000000443      0x1c3 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_loc     0x0000000000000606      0x17b _build/led_driver.o
+ .debug_loc     0x0000000000000781       0x37 _build/nrf_delay.o
+ .debug_loc     0x00000000000007b8     0x1715 _build/nrf_drv_gpiote.o
+ .debug_loc     0x0000000000001ecd      0xfda _build/nrf_drv_timer.o
+ .debug_loc     0x0000000000002ea7     0x102b _build/nrf_drv_uart.o
 
-.debug_frame    0x0000000000000000      0x170
+.debug_frame    0x0000000000000000      0x730
  .debug_frame   0x0000000000000000       0x28 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_frame   0x0000000000000028       0x28 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
  .debug_frame   0x0000000000000050       0x2c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-fini.o)
@@ -774,6 +1039,20 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_frame   0x00000000000000d8       0x3c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
  .debug_frame   0x0000000000000114       0x3c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_frame   0x0000000000000150       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
+ .debug_frame   0x0000000000000170       0x30 _build/system_nrf51.o
+ .debug_frame   0x00000000000001a0       0x4c _build/led_driver.o
+ .debug_frame   0x00000000000001ec       0x40 _build/main.o
+ .debug_frame   0x000000000000022c       0x24 _build/nrf_delay.o
+ .debug_frame   0x0000000000000250      0x1f0 _build/nrf_drv_gpiote.o
+ .debug_frame   0x0000000000000440      0x1d0 _build/nrf_drv_timer.o
+ .debug_frame   0x0000000000000610      0x120 _build/nrf_drv_uart.o
 
-.debug_ranges   0x0000000000000000       0x20
+.debug_ranges   0x0000000000000000     0x1300
  .debug_ranges  0x0000000000000000       0x20 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
+ .debug_ranges  0x0000000000000020       0x50 _build/system_nrf51.o
+ .debug_ranges  0x0000000000000070       0x60 _build/led_driver.o
+ .debug_ranges  0x00000000000000d0       0x18 _build/main.o
+ .debug_ranges  0x00000000000000e8       0x28 _build/nrf_delay.o
+ .debug_ranges  0x0000000000000110      0x7d0 _build/nrf_drv_gpiote.o
+ .debug_ranges  0x00000000000008e0      0x5d0 _build/nrf_drv_timer.o
+ .debug_ranges  0x0000000000000eb0      0x450 _build/nrf_drv_uart.o
