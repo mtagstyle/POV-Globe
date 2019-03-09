@@ -39,6 +39,7 @@ remduplicates = $(strip $(if $1,$(firstword $1) $(call remduplicates,$(filter-ou
 C_SOURCE_FILES += \
 ../../../../../components/toolchain/system_nrf51.c \
 ../../led_driver.c \
+../../image_processor.c \
 ../../main.c \
 ../../../../../components/libraries/util/app_error.c \
 ../../../../../components/libraries/fifo/app_fifo.c \

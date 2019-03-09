@@ -75,6 +75,31 @@ Discarded input sections
  .text          0x0000000000000000        0x0 _build/led_driver.o
  .data          0x0000000000000000        0x0 _build/led_driver.o
  .bss           0x0000000000000000        0x0 _build/led_driver.o
+ .text          0x0000000000000000        0x0 _build/image_processor.o
+ .data          0x0000000000000000        0x0 _build/image_processor.o
+ .bss           0x0000000000000000        0x0 _build/image_processor.o
+ .text.MapImageToBitPattern.part.0
+                0x0000000000000000      0x22c _build/image_processor.o
+ .text.ConvertDepthTo24
+                0x0000000000000000       0x1c _build/image_processor.o
+ .text.GetLedInfo
+                0x0000000000000000       0x68 _build/image_processor.o
+ .text.MapImageToBitPattern
+                0x0000000000000000       0x2c _build/image_processor.o
+ .text.SaveImageToFlash
+                0x0000000000000000       0x34 _build/image_processor.o
+ .debug_info    0x0000000000000000      0xe49 _build/image_processor.o
+ .debug_abbrev  0x0000000000000000      0x2f3 _build/image_processor.o
+ .debug_loc     0x0000000000000000      0xab8 _build/image_processor.o
+ .debug_aranges
+                0x0000000000000000       0x40 _build/image_processor.o
+ .debug_ranges  0x0000000000000000      0x1e0 _build/image_processor.o
+ .debug_line    0x0000000000000000      0x275 _build/image_processor.o
+ .debug_str     0x0000000000000000      0x707 _build/image_processor.o
+ .comment       0x0000000000000000       0x32 _build/image_processor.o
+ .debug_frame   0x0000000000000000       0xa8 _build/image_processor.o
+ .ARM.attributes
+                0x0000000000000000       0x31 _build/image_processor.o
  .text          0x0000000000000000        0x0 _build/main.o
  .data          0x0000000000000000        0x0 _build/main.o
  .bss           0x0000000000000000        0x0 _build/main.o
@@ -568,6 +593,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc
 LOAD /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a
 LOAD _build/system_nrf51.o
 LOAD _build/led_driver.o
+LOAD _build/image_processor.o
 LOAD _build/main.o
 LOAD _build/app_error.o
 LOAD _build/app_fifo.o
@@ -604,7 +630,7 @@ END GROUP
  *(fs_data)
                 [!provide]                        PROVIDE (__stop_fs_data, .)
 
-.text           0x0000000000000000      0xc88
+.text           0x0000000000000000      0xc7c
  *(.Vectors)
  .Vectors       0x0000000000000000       0xc0 _build/gcc_startup_nrf51.o
                 0x0000000000000000                __Vectors
@@ -636,65 +662,65 @@ END GROUP
                 0x000000000000057c       0x30 _build/led_driver.o
                 0x000000000000057c                led_driver_initialize
  .text.led_driver_print_bitstream
-                0x00000000000005ac       0x64 _build/led_driver.o
+                0x00000000000005ac       0x58 _build/led_driver.o
                 0x00000000000005ac                led_driver_print_bitstream
  .text.startup.main
-                0x0000000000000610       0x34 _build/main.o
-                0x0000000000000610                main
+                0x0000000000000604       0x34 _build/main.o
+                0x0000000000000604                main
  .text.nrf_delay_ms
-                0x0000000000000644       0x3c _build/nrf_delay.o
-                0x0000000000000644                nrf_delay_ms
+                0x0000000000000638       0x3c _build/nrf_delay.o
+                0x0000000000000638                nrf_delay_ms
  .text.GPIOTE_IRQHandler
-                0x0000000000000680      0x1ec _build/nrf_drv_gpiote.o
-                0x0000000000000680                GPIOTE_IRQHandler
+                0x0000000000000674      0x1ec _build/nrf_drv_gpiote.o
+                0x0000000000000674                GPIOTE_IRQHandler
  .text.TIMER0_IRQHandler
-                0x000000000000086c       0xc0 _build/nrf_drv_timer.o
-                0x000000000000086c                TIMER0_IRQHandler
+                0x0000000000000860       0xc0 _build/nrf_drv_timer.o
+                0x0000000000000860                TIMER0_IRQHandler
  .text.TIMER1_IRQHandler
-                0x000000000000092c       0xc0 _build/nrf_drv_timer.o
-                0x000000000000092c                TIMER1_IRQHandler
+                0x0000000000000920       0xc0 _build/nrf_drv_timer.o
+                0x0000000000000920                TIMER1_IRQHandler
  .text.TIMER2_IRQHandler
-                0x00000000000009ec       0xc0 _build/nrf_drv_timer.o
-                0x00000000000009ec                TIMER2_IRQHandler
+                0x00000000000009e0       0xc0 _build/nrf_drv_timer.o
+                0x00000000000009e0                TIMER2_IRQHandler
  .text.UART0_IRQHandler
-                0x0000000000000aac      0x16c _build/nrf_drv_uart.o
-                0x0000000000000aac                UART0_IRQHandler
- .text          0x0000000000000c18       0x54 _build/gcc_startup_nrf51.o
-                0x0000000000000c18                Reset_Handler
-                0x0000000000000c60                NMI_Handler
-                0x0000000000000c62                HardFault_Handler
-                0x0000000000000c64                SVC_Handler
-                0x0000000000000c66                PendSV_Handler
-                0x0000000000000c68                SysTick_Handler
-                0x0000000000000c6a                SPI0_TWI0_IRQHandler
-                0x0000000000000c6a                RTC0_IRQHandler
-                0x0000000000000c6a                POWER_CLOCK_IRQHandler
-                0x0000000000000c6a                RADIO_IRQHandler
-                0x0000000000000c6a                LPCOMP_IRQHandler
-                0x0000000000000c6a                SWI4_IRQHandler
-                0x0000000000000c6a                TEMP_IRQHandler
-                0x0000000000000c6a                QDEC_IRQHandler
-                0x0000000000000c6a                SWI5_IRQHandler
-                0x0000000000000c6a                SWI0_IRQHandler
-                0x0000000000000c6a                ECB_IRQHandler
-                0x0000000000000c6a                Default_Handler
-                0x0000000000000c6a                ADC_IRQHandler
-                0x0000000000000c6a                SWI3_IRQHandler
-                0x0000000000000c6a                CCM_AAR_IRQHandler
-                0x0000000000000c6a                WDT_IRQHandler
-                0x0000000000000c6a                SWI2_IRQHandler
-                0x0000000000000c6a                RNG_IRQHandler
-                0x0000000000000c6a                SPI1_TWI1_IRQHandler
-                0x0000000000000c6a                RTC1_IRQHandler
-                0x0000000000000c6a                SWI1_IRQHandler
+                0x0000000000000aa0      0x16c _build/nrf_drv_uart.o
+                0x0000000000000aa0                UART0_IRQHandler
+ .text          0x0000000000000c0c       0x54 _build/gcc_startup_nrf51.o
+                0x0000000000000c0c                Reset_Handler
+                0x0000000000000c54                NMI_Handler
+                0x0000000000000c56                HardFault_Handler
+                0x0000000000000c58                SVC_Handler
+                0x0000000000000c5a                PendSV_Handler
+                0x0000000000000c5c                SysTick_Handler
+                0x0000000000000c5e                SPI0_TWI0_IRQHandler
+                0x0000000000000c5e                RTC0_IRQHandler
+                0x0000000000000c5e                POWER_CLOCK_IRQHandler
+                0x0000000000000c5e                RADIO_IRQHandler
+                0x0000000000000c5e                LPCOMP_IRQHandler
+                0x0000000000000c5e                SWI4_IRQHandler
+                0x0000000000000c5e                TEMP_IRQHandler
+                0x0000000000000c5e                QDEC_IRQHandler
+                0x0000000000000c5e                SWI5_IRQHandler
+                0x0000000000000c5e                SWI0_IRQHandler
+                0x0000000000000c5e                ECB_IRQHandler
+                0x0000000000000c5e                Default_Handler
+                0x0000000000000c5e                ADC_IRQHandler
+                0x0000000000000c5e                SWI3_IRQHandler
+                0x0000000000000c5e                CCM_AAR_IRQHandler
+                0x0000000000000c5e                WDT_IRQHandler
+                0x0000000000000c5e                SWI2_IRQHandler
+                0x0000000000000c5e                RNG_IRQHandler
+                0x0000000000000c5e                SPI1_TWI1_IRQHandler
+                0x0000000000000c5e                RTC1_IRQHandler
+                0x0000000000000c5e                SWI1_IRQHandler
  *(.init)
- .init          0x0000000000000c6c        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
-                0x0000000000000c6c                _init
- .init          0x0000000000000c70        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
+ .init          0x0000000000000c60        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
+                0x0000000000000c60                _init
+ .init          0x0000000000000c64        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
  *(.fini)
- .fini          0x0000000000000c78        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
-                0x0000000000000c78                _fini
- .fini          0x0000000000000c7c        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
+ .fini          0x0000000000000c6c        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crti.o
+                0x0000000000000c6c                _fini
+ .fini          0x0000000000000c70        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -706,45 +732,45 @@ END GROUP
  *(SORT(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x0000000000000c84        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-impure.o)
-                0x0000000000000c84                _global_impure_ptr
+ .rodata        0x0000000000000c78        0x4 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-impure.o)
+                0x0000000000000c78                _global_impure_ptr
  *(.eh_frame*)
- .eh_frame      0x0000000000000c88        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
-                0x0000000000000c88                . = ALIGN (0x4)
+ .eh_frame      0x0000000000000c7c        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+                0x0000000000000c7c                . = ALIGN (0x4)
 
-.glue_7         0x0000000000000c88        0x0
- .glue_7        0x0000000000000c88        0x0 linker stubs
+.glue_7         0x0000000000000c7c        0x0
+ .glue_7        0x0000000000000c7c        0x0 linker stubs
 
-.glue_7t        0x0000000000000c88        0x0
- .glue_7t       0x0000000000000c88        0x0 linker stubs
+.glue_7t        0x0000000000000c7c        0x0
+ .glue_7t       0x0000000000000c7c        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000000c88        0x0
- .vfp11_veneer  0x0000000000000c88        0x0 linker stubs
+.vfp11_veneer   0x0000000000000c7c        0x0
+ .vfp11_veneer  0x0000000000000c7c        0x0 linker stubs
 
-.v4_bx          0x0000000000000c88        0x0
- .v4_bx         0x0000000000000c88        0x0 linker stubs
+.v4_bx          0x0000000000000c7c        0x0
+ .v4_bx         0x0000000000000c7c        0x0 linker stubs
 
-.iplt           0x0000000000000c88        0x0
- .iplt          0x0000000000000c88        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.iplt           0x0000000000000c7c        0x0
+ .iplt          0x0000000000000c7c        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.ARM.extab      0x0000000000000c88        0x0
+.ARM.extab      0x0000000000000c7c        0x0
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000000c88                . = ALIGN (0x4)
-                0x0000000000000c88                __exidx_start = .
+                0x0000000000000c7c                . = ALIGN (0x4)
+                0x0000000000000c7c                __exidx_start = .
 
-.ARM.exidx      0x0000000000000c88        0x8
+.ARM.exidx      0x0000000000000c7c        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0000000000000c88        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
- .ARM.exidx     0x0000000000000c90        0x0 _build/gcc_startup_nrf51.o
+ .ARM.exidx     0x0000000000000c7c        0x8 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
+ .ARM.exidx     0x0000000000000c84        0x0 _build/gcc_startup_nrf51.o
                                           0x8 (size before relaxing)
-                0x0000000000000c90                . = ALIGN (0x4)
-                0x0000000000000c90                __exidx_end = .
-                0x0000000000000c90                __etext = .
+                0x0000000000000c84                . = ALIGN (0x4)
+                0x0000000000000c84                __exidx_end = .
+                0x0000000000000c84                __etext = .
 
-.rel.dyn        0x0000000000000c90        0x0
- .rel.iplt      0x0000000000000c90        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
+.rel.dyn        0x0000000000000c84        0x0
+ .rel.iplt      0x0000000000000c84        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.data           0x0000000020000000       0x70 load address 0x0000000000000c90
+.data           0x0000000020000000       0x70 load address 0x0000000000000c84
                 0x0000000020000000                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -775,16 +801,16 @@ END GROUP
                 0x0000000020000070                __data_end__ = .
 
 .tm_clone_table
-                0x0000000020000070        0x0 load address 0x0000000000000d00
+                0x0000000020000070        0x0 load address 0x0000000000000cf4
  .tm_clone_table
                 0x0000000020000070        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
  .tm_clone_table
                 0x0000000020000070        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtend.o
 
-.igot.plt       0x0000000020000070        0x0 load address 0x0000000000000d00
+.igot.plt       0x0000000020000070        0x0 load address 0x0000000000000cf4
  .igot.plt      0x0000000020000070        0x0 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtbegin.o
 
-.bss            0x0000000020000070      0x114 load address 0x0000000000000d00
+.bss            0x0000000020000070      0x114 load address 0x0000000000000cf4
                 0x0000000020000070                . = ALIGN (0x4)
                 0x0000000020000070                __bss_start__ = .
  *(.bss*)
@@ -888,7 +914,7 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .comment       0x0000000000000088       0x32 _build/nrf_drv_uart.o
  .comment       0x0000000000000088       0x32 /usr/lib/gcc/arm-none-eabi/6.3.1/thumb/v6-m/crtend.o
 
-.debug_line     0x0000000000000000     0x2bbc
+.debug_line     0x0000000000000000     0x2baf
  .debug_line    0x0000000000000000       0x86 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
  .debug_line    0x0000000000000086      0x129 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_line    0x00000000000001af      0x12c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
@@ -900,14 +926,14 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_line    0x000000000000081b      0x178 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_line    0x0000000000000993       0x5b /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
  .debug_line    0x00000000000009ee      0x120 _build/system_nrf51.o
- .debug_line    0x0000000000000b0e      0x24a _build/led_driver.o
- .debug_line    0x0000000000000d58      0x29e _build/main.o
- .debug_line    0x0000000000000ff6      0x173 _build/nrf_delay.o
- .debug_line    0x0000000000001169      0x9a3 _build/nrf_drv_gpiote.o
- .debug_line    0x0000000000001b0c      0x863 _build/nrf_drv_timer.o
- .debug_line    0x000000000000236f      0x84d _build/nrf_drv_uart.o
+ .debug_line    0x0000000000000b0e      0x23d _build/led_driver.o
+ .debug_line    0x0000000000000d4b      0x29e _build/main.o
+ .debug_line    0x0000000000000fe9      0x173 _build/nrf_delay.o
+ .debug_line    0x000000000000115c      0x9a3 _build/nrf_drv_gpiote.o
+ .debug_line    0x0000000000001aff      0x863 _build/nrf_drv_timer.o
+ .debug_line    0x0000000000002362      0x84d _build/nrf_drv_uart.o
 
-.debug_info     0x0000000000000000     0xc02b
+.debug_info     0x0000000000000000     0xc013
  .debug_info    0x0000000000000000       0x26 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
  .debug_info    0x0000000000000026      0x907 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_info    0x000000000000092d      0x952 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
@@ -919,14 +945,14 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_info    0x00000000000034cd      0x95e /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_info    0x0000000000003e2b       0x9a /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
  .debug_info    0x0000000000003ec5      0x1ca _build/system_nrf51.o
- .debug_info    0x000000000000408f      0xdab _build/led_driver.o
- .debug_info    0x0000000000004e3a      0xfe9 _build/main.o
- .debug_info    0x0000000000005e23      0x91a _build/nrf_delay.o
- .debug_info    0x000000000000673d     0x1eb7 _build/nrf_drv_gpiote.o
- .debug_info    0x00000000000085f4     0x183d _build/nrf_drv_timer.o
- .debug_info    0x0000000000009e31     0x21fa _build/nrf_drv_uart.o
+ .debug_info    0x000000000000408f      0xd93 _build/led_driver.o
+ .debug_info    0x0000000000004e22      0xfe9 _build/main.o
+ .debug_info    0x0000000000005e0b      0x91a _build/nrf_delay.o
+ .debug_info    0x0000000000006725     0x1eb7 _build/nrf_drv_gpiote.o
+ .debug_info    0x00000000000085dc     0x183d _build/nrf_drv_timer.o
+ .debug_info    0x0000000000009e19     0x21fa _build/nrf_drv_uart.o
 
-.debug_abbrev   0x0000000000000000     0x2104
+.debug_abbrev   0x0000000000000000     0x2106
  .debug_abbrev  0x0000000000000000       0x14 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/crt0.o
  .debug_abbrev  0x0000000000000014      0x1c8 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_abbrev  0x00000000000001dc      0x1cd /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
@@ -938,12 +964,12 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_abbrev  0x0000000000000a46      0x1fd /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
  .debug_abbrev  0x0000000000000c43       0x61 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libnosys.a(_exit.o)
  .debug_abbrev  0x0000000000000ca4      0x108 _build/system_nrf51.o
- .debug_abbrev  0x0000000000000dac      0x306 _build/led_driver.o
- .debug_abbrev  0x00000000000010b2      0x286 _build/main.o
- .debug_abbrev  0x0000000000001338      0x210 _build/nrf_delay.o
- .debug_abbrev  0x0000000000001548      0x476 _build/nrf_drv_gpiote.o
- .debug_abbrev  0x00000000000019be      0x3aa _build/nrf_drv_timer.o
- .debug_abbrev  0x0000000000001d68      0x39c _build/nrf_drv_uart.o
+ .debug_abbrev  0x0000000000000dac      0x308 _build/led_driver.o
+ .debug_abbrev  0x00000000000010b4      0x286 _build/main.o
+ .debug_abbrev  0x000000000000133a      0x210 _build/nrf_delay.o
+ .debug_abbrev  0x000000000000154a      0x476 _build/nrf_drv_gpiote.o
+ .debug_abbrev  0x00000000000019c0      0x3aa _build/nrf_drv_timer.o
+ .debug_abbrev  0x0000000000001d6a      0x39c _build/nrf_drv_uart.o
 
 .debug_aranges  0x0000000000000000      0x3c0
  .debug_aranges
@@ -1003,9 +1029,9 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
                                         0x17c (size before relaxing)
  .debug_str     0x0000000000000cc4      0x22c _build/system_nrf51.o
                                         0x2b9 (size before relaxing)
- .debug_str     0x0000000000000ef0      0x320 _build/led_driver.o
-                                        0x8d4 (size before relaxing)
- .debug_str     0x0000000000001210      0x7df _build/main.o
+ .debug_str     0x0000000000000ef0      0x30f _build/led_driver.o
+                                        0x8c3 (size before relaxing)
+ .debug_str     0x00000000000011ff      0x7f0 _build/main.o
                                         0xe2d (size before relaxing)
  .debug_str     0x00000000000019ef       0x65 _build/nrf_delay.o
                                         0x616 (size before relaxing)
@@ -1016,7 +1042,7 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_str     0x0000000000002d26      0x9c8 _build/nrf_drv_uart.o
                                        0x121a (size before relaxing)
 
-.debug_loc      0x0000000000000000     0x3ed2
+.debug_loc      0x0000000000000000     0x3ef7
  .debug_loc     0x0000000000000000       0x2c /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)
  .debug_loc     0x000000000000002c       0x1e /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-exit.o)
  .debug_loc     0x000000000000004a       0x3e /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-fini.o)
@@ -1024,11 +1050,11 @@ OUTPUT(_build/nrf51422_xxac.out elf32-littlearm)
  .debug_loc     0x000000000000010c      0x1a5 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-memset.o)
  .debug_loc     0x00000000000002b1      0x192 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__atexit.o)
  .debug_loc     0x0000000000000443      0x1c3 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-__call_atexit.o)
- .debug_loc     0x0000000000000606      0x17b _build/led_driver.o
- .debug_loc     0x0000000000000781       0x37 _build/nrf_delay.o
- .debug_loc     0x00000000000007b8     0x1715 _build/nrf_drv_gpiote.o
- .debug_loc     0x0000000000001ecd      0xfda _build/nrf_drv_timer.o
- .debug_loc     0x0000000000002ea7     0x102b _build/nrf_drv_uart.o
+ .debug_loc     0x0000000000000606      0x1a0 _build/led_driver.o
+ .debug_loc     0x00000000000007a6       0x37 _build/nrf_delay.o
+ .debug_loc     0x00000000000007dd     0x1715 _build/nrf_drv_gpiote.o
+ .debug_loc     0x0000000000001ef2      0xfda _build/nrf_drv_timer.o
+ .debug_loc     0x0000000000002ecc     0x102b _build/nrf_drv_uart.o
 
 .debug_frame    0x0000000000000000      0x730
  .debug_frame   0x0000000000000000       0x28 /usr/lib/gcc/arm-none-eabi/6.3.1/../../../arm-none-eabi/lib/thumb/v6-m/libc_nano.a(lib_a-atexit.o)

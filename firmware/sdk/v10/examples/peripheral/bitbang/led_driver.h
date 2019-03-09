@@ -20,6 +20,6 @@
 typedef uint8_t gpio_bitstream_t[BITSTREAM_LEN];
 
 bool led_driver_initialize();
-bool led_driver_print_bitstream(gpio_bitstream_t *bit_ptr);
+bool led_driver_print_bitstream(gpio_bitstream_t bit_ptr);
 void test_fs_config();
 #endif

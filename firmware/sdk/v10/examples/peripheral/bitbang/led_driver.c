@@ -1,5 +1,6 @@
 #include <string.h>
-#include "stdint.h"
+#include <stdint.h>
+
 #include "led_driver.h"
 #include "gpio.h"
 #include "nrf_delay.h"
@@ -35,7 +36,7 @@ bool led_driver_initialize()
 
 	Requires: A pointer to a bitstream is provided, GPIOs are all initialized	                  
 */
-bool led_driver_print_bitstream(gpio_bitstream_t *bitstream_ptr)
+bool led_driver_print_bitstream(gpio_bitstream_t bitstream_ptr)
 {
 	// Iterate through every single byte in the LED strip length R,G,B,R,G,B
 	bool result    		 	 = true;
