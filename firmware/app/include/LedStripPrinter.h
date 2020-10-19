@@ -7,7 +7,6 @@ class LedStripPrinter
 {
 public:
     LedStripPrinter(std::shared_ptr<LedStripDataStore> data,
-                    led_strip_t strip,
                     uint16_t    offset, 
                     uint16_t    num_leds, 
                     uint16_t    num_patterns);

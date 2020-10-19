@@ -85,7 +85,6 @@ int main(int argc, char* argv[])
     for(int i = 0; i < num_strips; i++)
     {
         strip_printers->emplace_back( datastore, 
-                                      static_cast<led_strip_t>(i+1), 
                                       offset,
                                       leds_per_strip,
                                       img_cols );
